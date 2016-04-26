@@ -1,0 +1,9 @@
+Package: cmrSpace
+Type: Package
+Title: Analysis of cardiac magnetic resonance images
+Version: 0.1
+Date: 2016-04-26
+Author: Volker Schmid
+Maintainer: Volker Schmid <volker.schmid@lmu.de>
+Description: Analysis of cardiac magnetic resonance images
+License: GPLv3
