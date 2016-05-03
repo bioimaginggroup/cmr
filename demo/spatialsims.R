@@ -1,8 +1,7 @@
 require(Matrix)
 library(cmrSpace)
 
-
-load("sim.Rdata")
+data(sim)
 data=data.data
 resp.resp[resp.resp==0]<-NA
 resp=resp.resp
