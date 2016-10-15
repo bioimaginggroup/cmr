@@ -7,3 +7,4 @@ Author: Volker Schmid
 Maintainer: Volker Schmid <volker.schmid@lmu.de>
 Description: Analysis of cardiac magnetic resonance images
 License: GPLv3
+RoxygenNote: 5.0.1
