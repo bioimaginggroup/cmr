@@ -1,14 +1,37 @@
-cmr.local<-function(data,mask,aif,quantiles=c(.25,.75))
+#' Title Spline analysis of cardiovascular magnetic resonance imaging
+#'
+#' @param data 3d array of CMR signal 
+#' @param mask 2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis
+#' @param input input function
+#' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
+#'
+#' @return list of mbf (point estimation) and ci (credible interval)
+#' @export
+#' @import splines Matrix 
+#' 
+#' @examples
+#'  library(cmr)
+#'  data(sim)
+#'  local.mbf=array(NA,c(30,30,3))
+#'  local.ci=array(NA,c(30,30,3))
+#'  for (i in 1:3)
+#'  {  mask=array(NA,c(30,30))
+#'  mask[data.data[,,i,1]!=0]=1
+#'  temp=cmr.local(data.data[,,i,],mask,aif)
+#'  local.mbf[,,i]=t(as.matrix(temp$mbf))
+#'  local.ci[,,i]=t(as.matrix(temp$ci))
+#'  }
+#' par(mfrow=c(2,1))
+#' imageMBF(resp,zlim=c(0,5))
+#' imageMBF(local.mbf,zlim=c(0,5))
+
+cmr.local<-function(data,mask,input,quantiles=c(.25,.75))
 {
 
-require(Matrix)
-require(splines)
-  
 XX<-dim(data)[1]
 YY<-dim(data)[2]
 N<-sum(!is.na(mask))
-
-T=30
+T=dim(data)[3]
 
 # compute B
 
@@ -37,7 +60,7 @@ if (zeit[j]<=zeit[i])ni[i]=j
 for (i in 1:length(zeit))
 for (j in 1:ni[i])
 {
-A[i,j]<-aif[1+ni[i]-j]
+A[i,j]<-input[1+ni[i]-j]
 }
 A<-A*mean(diff(zeit))
 
@@ -151,6 +174,7 @@ tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
 for (iter in 1:1000)
 {
+  cat(paste("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bIteration",iter))
 # update beta
 
 L = Q.sparse + taueps.local*DD
@@ -202,7 +226,7 @@ resp.l4=resp.l4[2,,]-resp.l4[1,,]
 resp.l4=t(resp.l4)
 resp.l4=resp.l4[!is.na(resp.l4)]
 resp.l4<-sparseMatrix(coord[2,],coord[1,],x=resp.l4,dims=c(XX,YY))
-
+cat("\n")
 return(list("mbf"=resp.l,"ci"=resp.l4))
 }
 

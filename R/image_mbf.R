@@ -1,6 +1,19 @@
-image.mbf<-function(img,zlim=NULL,reverse=TRUE)
+#' Title Plotting of (voxelwise) cardiac MBF 
+#'
+#' @param img 3d array ob MBF values
+#' @param zlim limits of MBF, default: NULL means zlim=c(0,max(img,na.rm=TRUE))
+#' @param reverse reverse color scheme
+#'
+#' @return plots
+#' @export
+#' @import fields graphics
+#'
+#' @examples
+#' library(cmr)
+#' data(sim)
+#' image.mbf(resp)
+imageMBF<-function(img,zlim=NULL,reverse=TRUE)
 {
-require(fields)
 Z=dim(img)[3]
 if (is.null(zlim))
 zlim=c(0,max(img,na.rm=TRUE))
@@ -25,10 +38,13 @@ fullimg=rbind(fullimg,img[xrange[1]:xrange[2],yrange[1]:yrange[2],i])
 }
 fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
-par(fin=5*c(dim(fullimg)/max(dim(fullimg))))
-par(mai=c(0,0,0,0))
+par(pin=5*c(dim(fullimg)/max(dim(fullimg))))
+#par(mai=c(0,0,0,0))
 farbe=tim.colors(64)
 if(reverse)farbe=rev(farbe)
+#add  space for legend
+for (i in 1:floor(dim(fullimg)[1]/6))fullimg <- rbind(fullimg,rep(NA,diff(yrange)+1))
 image(fullimg,zlim=zlim,axes=FALSE,col = farbe)
+image.plot(fullimg,zlim=zlim,legend.only=TRUE,legend.width=1.8,add=TRUE)
 }
 

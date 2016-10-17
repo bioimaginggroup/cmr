@@ -1,6 +1,17 @@
-bullseye<-function(werte,zlim=NULL,reverse=TRUE,text=TRUE)
+#' Title
+#'
+#' @param werte 
+#' @param zlim 
+#' @param reverse 
+#' @param text 
+#'
+#' @return
+#' @export
+#' @import fields
+#'
+#' @examples
+bullseye<-function(werte,zlim=NULL,reverse=TRUE,text=TRUE,cex=2)
 {
-require(fields)
 if(is.null(zlim))zlim=c(0,max(werte,na.rm=TRUE))
 
 ziel0<-werte
@@ -37,11 +48,12 @@ col=colo[263*ziel[i+12]+1],border="black")
 #dev.off()
 
 if(text){
-  par(cex=2)
+  par(cex=cex)
 text(0.88,0.5,"LCX")
 text(0.1,0.85,"LAD")
 text(0.1,0.15,"RCA")
 }
+image.plot(fullimg,zlim=zlim,legend.only=TRUE,legend.width=1.8,add=TRUE)
 }
 
 bullseye.1<-function(werte,zlim=NULL,reverse=TRUE)
