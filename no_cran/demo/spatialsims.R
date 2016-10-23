@@ -1,4 +1,4 @@
-require(Matrix)
+library(Matrix)
 library(cmrSpace)
 
 data(sim)

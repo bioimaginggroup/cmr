@@ -1,17 +1,39 @@
-cmr.space<-function(data,mask,aif,quantiles=c(.25,.75))
+#' Title Spatial spline analysis of cardiovascular magnetic resonance imaging
+#'
+#' @param data 3d array of CMR signal 
+#' @param mask 2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis
+#' @param input input function
+#' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
+#'
+#' @return list of mbf (point estimation) and ci (credible interval)
+#' @export
+#' @import splines stats
+#' @examples 
+#' library(cmr)
+#' data(sim)
+#' space.mbf=array(NA,c(30,30,3))
+#' space.ci=array(NA,c(30,30,3))
+#' for (i in 1:3)
+#' {
+#' mask=array(NA,c(30,30))
+#' mask[data.data[,,i,1]!=0]=1
+#' temp=cmr.space(data.data[,,i,],mask,aif)
+#' space.mbf[,,i]=t(as.matrix(temp$mbf))
+#' space.ci[,,i]=t(as.matrix(temp$ci))
+#' }
+#' par(mfrow=c(2,1))
+#' imageMBF(resp,zlim=c(0,5))
+#' imageMBF(space.mbf,zlim=c(0,5))
+
+cmr.space<-function(data,mask,input,quantiles=c(.25,.75))
 {
-
-require(Matrix)
-
-T=30
-
 XX<-dim(data)[1]
 YY<-dim(data)[2]
 N<-sum(!is.na(mask))
+T=dim(data)[3]
 
 # compute B
 
-library(splines)
 zeit<-((1:T)-1)/60
 #knots<-seq(-6.5,44,length=25)/60
 #knots<-knots[-seq(13,25,by=2)]
@@ -37,7 +59,7 @@ if (zeit[j]<=zeit[i])ni[i]=j
 for (i in 1:length(zeit))
 for (j in 1:ni[i])
 {
-A[i,j]<-aif[1+ni[i]-j]
+A[i,j]<-input[1+ni[i]-j]
 }
 A<-A*mean(diff(zeit))
 
@@ -55,7 +77,7 @@ j=c(j,jj)
 x=c(x,D[ii,jj])
 }
 
-D.sparse=sparseMatrix(i, j, x=x, dims=c(T,p))
+D.sparse=Matrix::sparseMatrix(i, j, x=x, dims=c(T,p))
 DD<-Matrix::t(D.sparse)%*%D.sparse
 
 DC <- Ct <- c()
@@ -93,7 +115,7 @@ tauq2Q[1:4+(i-1)*3,i]<-c(1,-1,-1,1)
 
 tauq<-rep(1,p-1)
 
-Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
+Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
 
 }
 
@@ -120,7 +142,7 @@ tauq2Q<-tauq2Q[-(p*5-8+c(0,4)),]
 
 tauq<-rep(1,p-2)
 
-Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
+Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
 }
 
 #prepare R
@@ -155,12 +177,12 @@ taur2R[N+NEI+j,j]<- -1
 }
 
 taur<-rep(1,NEI)
-R.sparse=sparseMatrix(R.x,R.y,x=as.vector(taur2R%*%taur),dims=c(N,N))
+R.sparse=Matrix::sparseMatrix(R.x,R.y,x=as.vector(taur2R%*%taur),dims=c(N,N))
 
-QR=kronecker(R.sparse,Q.sparse)
+QR=Matrix::kronecker(R.sparse,Q.sparse)
 taueps=rep(1/10,N)
 
-IDD = kronecker(Diagonal(N,taueps),DD)
+IDD = Matrix::kronecker(Matrix::Diagonal(N,taueps),DD)
 IDC = rep(taueps,each=p)*DC
 
 if (rw==2)Q.klein<-matrix(c(1,-2,1,-2,4,-2,1,-2,1),nrow=3)
@@ -173,7 +195,7 @@ for (iter in 1:200)
 {
 
 # update beta
-QR=kronecker(diag(rep(1,N)),Q.sparse)+kronecker(R.sparse,diag(rep(1,p)))
+QR=Matrix::kronecker(diag(rep(1,N)),Q.sparse)+kronecker(R.sparse,diag(rep(1,p)))
 
 L = QR + IDD
 b = IDC
@@ -191,11 +213,9 @@ bb=1e-3+sum(0.5*(D.sparse%*%beta[(1:p)+(i-1)*p]-Ct[(1:T)+(i-1)*T])^2)
 taueps[i]=rgamma(1,a,bb)
 }
 
-IDD = kronecker(Diagonal(N,taueps),DD)
+IDD = Matrix::kronecker(Diagonal(N,taueps),DD)
 IDC = rep(taueps,each=p)*DC
 
-if(1)
-{
 #QkR<-kronecker(Q.klein,R.sparse)
 #QkR<-kronecker(R.sparse,Q.klein)
 for (i in sample(1:(p-rw)))
@@ -214,7 +234,7 @@ bb=1+0.5*beta1%*%R.sparse%*%beta1
 tauq[i]=rgamma(1,aa,bb[1,1])
 }
 
-Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
+Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
 
 if(iter>2)
 {
@@ -235,8 +255,7 @@ bb=1+0.5*(beta1-beta2)%*%Q.sparse%*%(beta1-beta2)
 taur[i]=rgamma(1,aa,bb[1,1])
 }
 
-R.sparse=sparseMatrix(R.x,R.y,x=as.vector(taur2R%*%taur),dims=c(N,N))
-}
+R.sparse=Matrix::sparseMatrix(R.x,R.y,x=as.vector(taur2R%*%taur),dims=c(N,N))
 }
 
 if (iter>10)
@@ -257,15 +276,16 @@ response[,j,i]<-B%*%beta.s[(1:p)+(j-1)*p,i]
 
 response.med=apply(response,c(1,2),median)
 
-resp.i<-sparseMatrix(coord[1,],coord[2,],x=apply(response.med,2,max),dims=c(XX,YY))
+resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(response.med,2,max),dims=c(XX,YY))
 
 resp.max=apply(response,2:3,max)
 q4<-function(x)quantile(x,c(.25,.75),na.rm=TRUE)
 resp.q4=apply(resp.max,1,q4)
 resp.q4=resp.q4[2,]-resp.q4[1,]
 
-resp.i<-sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,median),dims=c(XX,YY))
-resp.i4<-sparseMatrix(coord[1,],coord[2,],x=resp.q4,dims=c(XX,YY))
+resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,median),dims=c(XX,YY))
+resp.i4<-Matrix::sparseMatrix(coord[1,],coord[2,],x=resp.q4,dims=c(XX,YY))
 
-return(list("mbf"=resp.i,"ci"=resp.i4,"beta.s"=beta.s,"coord"=coord,"D"=D,"B"=B,"taur"=taur.s))
+return(list("mbf"=resp.i,"ci"=resp.i4))
+#,"beta.s"=beta.s,"coord"=coord,"D"=D,"B"=B,"taur"=taur.s))
 }
