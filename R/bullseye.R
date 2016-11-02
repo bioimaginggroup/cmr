@@ -1,15 +1,14 @@
-#' Title
+#' Bullseye plot for cmr
 #'
 #' @param werte 
 #' @param zlim 
 #' @param reverse 
 #' @param text 
 #'
-#' @return
+#' @return plot
 #' @export
 #' @import fields
 #'
-#' @examples
 bullseye<-function(werte,zlim=NULL,reverse=TRUE,text=TRUE,cex=2)
 {
 if(is.null(zlim))zlim=c(0,max(werte,na.rm=TRUE))
