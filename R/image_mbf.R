@@ -6,7 +6,7 @@
 #'
 #' @return plots
 #' @export
-#' @import fields graphics
+#' @importFrom graphics par plot polygon
 #'
 #' @examples
 #' library(cmr)
@@ -40,7 +40,7 @@ fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 par(pin=5*c(dim(fullimg)/max(dim(fullimg))))
 #par(mai=c(0,0,0,0))
-farbe=tim.colors(64)
+farbe=fields::tim.colors(64)
 if(reverse)farbe=rev(farbe)
 #add  space for legend
 for (i in 1:floor(dim(fullimg)[1]/6))fullimg <- rbind(fullimg,rep(NA,diff(yrange)+1))

@@ -162,19 +162,19 @@ R.klein<-matrix(c(1,-1,-1,1),nrow=2)
 
 mbf.local=array(NA,c(XX,YY,300))
 
-for (voxel in 1:N)
-{
-Ct <- data[coord[1,voxel],coord[2,voxel],]
-DC <- Matrix::t(D.sparse)%*%Ct
-
 tauq.local<-rep(1,p-2)
 Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
 taueps.local=1/10
 tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
+for (voxel in 1:N)
+{
+  cat(paste("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bVoxel",voxel, "von", N))
+  Ct <- data[coord[1,voxel],coord[2,voxel],]
+DC <- Matrix::t(D.sparse)%*%Ct
+
 for (iter in 1:1000)
 {
-  cat(paste("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bIteration",iter))
 # update beta
 
 L = Q.sparse + taueps.local*DD
@@ -230,5 +230,49 @@ cat("\n")
 return(list("mbf"=resp.l,"ci"=resp.l4))
 }
 
-
+cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local,DD,T, p, B, Q.klein, Q.x, Q.y, tauq2Q){
+  Ct <- data[coord[1,voxel],coord[2,voxel],]
+  DC <- Matrix::t(D.sparse)%*%Ct
+  
+  for (iter in 1:1000)
+  {
+    # update beta
+    
+    L = Q.sparse + taueps.local*DD
+    b = taueps.local*DC
+    L=Matrix::chol(as.matrix(L))
+    w=Matrix::solve(Matrix::t(L),b)
+    mu=Matrix::solve(L,w)
+    z=rnorm(p)
+    v=Matrix::solve(L,z)
+    beta.local=mu+v
+    
+    a=1+T/2
+    bb=1e-3+0.5*sum((D.sparse%*%beta.local-Ct)^2)
+    taueps.local=rgamma(1,a,bb)
+    
+    for (i in 1:(p-2))
+    {
+      which=rep(FALSE,p)
+      which[i:(i+2)]=TRUE
+      aa=1+1/2
+      bb=1e-3+0.5*beta.local[which]%*%Q.klein%*%beta.local[which]
+      tauq.local[i]=rgamma(1,aa,bb[1,1])
+    }
+    
+    Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
+    
+    if (((iter%/%3)==iter/3)&iter>100)
+    {
+      tauq.l.s=cbind(tauq.l.s,tauq.local)
+      taueps.l.s=c(taueps.l.s,taueps.local)
+      beta.l.s=cbind(beta.l.s,beta.local[,1])
+    }
+  }
+  
+  resp.local<-c()
+  for (i in 1:300)
+    resp.local<-cbind(resp.local,B%*%beta.l.s[,i])
+  
+}
 

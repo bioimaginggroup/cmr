@@ -1,18 +1,15 @@
 library(Matrix)
-library(cmrSpace)
+library(cmr)
 
 data(sim)
-data=data.data
-resp.resp[resp.resp==0]<-NA
-resp=resp.resp
+resp[resp==0]<-NA
+data[data==0]=NA
 
-data.data[data.data==0]=NA
-
-for (i in 1:dim(data.data)[1])
-for (j in 1:dim(data.data)[2])
+for (i in 1:dim(data)[1])
+for (j in 1:dim(data)[2])
 for (k in 1:3)
-if (!is.na(data.data[i,j,k,1]))
-data.data[i,j,k,]=data.data[i,j,k,]+rnorm(30,0,sqrt(30))
+if (!is.na(data[i,j,k,1]))
+data[i,j,k,]=data[i,j,k,]+rnorm(30,0,sqrt(30))
 
 space.mbf=array(NA,c(30,30,3))
 space.ci=array(NA,c(30,30,3))
@@ -22,8 +19,8 @@ local.ci=array(NA,c(30,30,3))
 for (i in 1:3)
 {
 mask=array(NA,c(30,30))
-mask[data.data[,,i,1]!=0]=1
-temp=cmr.local(data.data[,,i,],mask,aif)
+mask[data[,,i,1]!=0]=1
+temp=cmr.local(data[,,i,],mask,aif)
 local.mbf[,,i]=t(as.matrix(temp$mbf))
 local.ci[,,i]=t(as.matrix(temp$ci))
 }
@@ -31,8 +28,8 @@ local.ci[,,i]=t(as.matrix(temp$ci))
 for (i in 1:3)
 {
 mask=array(NA,c(30,30))
-mask[data.data[,,i,1]!=0]=1
-temp=cmr.space(data.data[,,i,],mask,aif)
+mask[data[,,i,1]!=0]=1
+temp=cmr.space(data[,,i,],mask,aif)
 space.mbf[,,i]=t(as.matrix(temp$mbf))
 space.ci[,,i]=t(as.matrix(temp$ci))
 }

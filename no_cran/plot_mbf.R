@@ -22,7 +22,7 @@ fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 xrange=range(which(apply(img[,,i],1,sum.na)!=0))
 fullimg=rbind(fullimg,img[xrange[1]:xrange[2],yrange[1]:yrange[2],i])
 }
-par(fin=10*c(dim(fullimg)/max(dim(fullimg))))
+#par(fin=10*c(dim(fullimg)/max(dim(fullimg))))
 
 image(fullimg,zlim=zlim,axes=FALSE,col = tim.colors(64))
 image.plot(fullimg,zlim=zlim,axes=FALSE,col = tim.colors(64),add=TRUE)
