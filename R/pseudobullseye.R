@@ -26,8 +26,8 @@ pseudobullseye<-function(x, lim, legend=FALSE, text=TRUE, reverse=FALSE, center=
       xi<-sum(x1)
       y<-apply(mbf[,,i],2,sum,na.rm=TRUE)!=0
       yi<-sum(y)
-      x0<-floor((xy-xi)/2)
-      y0<-floor((xy-yi)/2)
+      x0<-floor((dim(x)[1]-xi)/2)
+      y0<-floor((dim(x)[2]-yi)/2)
       mbf.neu[x0+1:xi,y0+1:yi,i]=mbf[x1,y,i]
     }
     mbf<-mbf.neu

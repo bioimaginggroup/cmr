@@ -14,7 +14,7 @@
 #'   bullseye(1:16)
 bullseye<-function(x, lim=NULL,reverse=TRUE,legend=TRUE,text=TRUE,cex=1)
 {
-if (length(x)!=16)error("x has to be of length 16")
+if (length(x)!=16)stop("x has to be of length 16")
 werte=x
 zlim=lim
 
