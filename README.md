@@ -1,1 +1,2 @@
+# cmR: cardiac magnetic resonance imaging in R
 This is the R code for Schmid, Volker J.: Voxel based adaptive spatio-temporal modelling of perfusion cardiovascular MRI. IEEE Transactions on Medical Imaging 30:7 (2011) 1305-1313.

@@ -24,10 +24,8 @@
 #' par(mfrow=c(2,1))
 #' imageMBF(resp,zlim=c(0,5))
 #' imageMBF(local.mbf,zlim=c(0,5))
-
 cmr.local<-function(data,mask,input,quantiles=c(.25,.75))
 {
-
 XX<-dim(data)[1]
 YY<-dim(data)[2]
 N<-sum(!is.na(mask))
