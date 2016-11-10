@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title Spline analysis of cardiovascular magnetic resonance imaging — cmr.local • cmR</title>
+<title>Spline analysis of cardiovascular magnetic resonance imaging — cmr.local • cmR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -54,17 +54,11 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
-</li>
-<li>
-  <a href="http://bioimaginggroup.github.io/cmR">cmR</a>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/cmR">
+  <a href="https://github.com/bioimaginggroup/cmR">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -80,11 +74,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title Spline analysis of cardiovascular magnetic resonance imaging</h1>
+    <h1>Spline analysis of cardiovascular magnetic resonance imaging</h1>
     </div>
 
     
-    <p>Title Spline analysis of cardiovascular magnetic resonance imaging</p>
+    <p>Spline analysis of cardiovascular magnetic resonance imaging</p>
     
 
     <pre><span class='fu'>cmr.local</span>(<span class='no'>data</span>, <span class='no'>mask</span>, <span class='no'>input</span>, <span class='kw'>quantiles</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.25</span>, <span class='fl'>0.75</span>))</pre>
@@ -106,19 +100,8 @@
     <p>list of mbf (point estimation) and ci (credible interval)</p>
     
 
-    <h2 class="hasAnchor" id="examples">
-      <a class="anchor" href="#examples"></a>
-      Examples
-    </h2>
-    <pre class="examples"><div class='input'> <span class='fu'>library</span>(<span class='no'>cmr</span>)</div><div class='output'><strong class='text-warning'>Warning message:
-replacing previous import ‘Matrix::cov2cor’ by ‘stats::cov2cor’ when loading ‘cmr’</strong></div><div class='output'><strong class='text-warning'>Warning message:
-replacing previous import ‘Matrix::toeplitz’ by ‘stats::toeplitz’ when loading ‘cmr’</strong></div><div class='output'><strong class='text-warning'>Warning message:
-replacing previous import ‘Matrix::update’ by ‘stats::update’ when loading ‘cmr’</strong></div><div class='output'><strong class='text-info'>
-Attaching package: ‘cmr’
-</strong></div><div class='output'><strong class='text-info'>The following objects are masked from ‘package:cmR’:
-
-    bullseye, cmr.local, cmr.space, imageMBF
-</strong></div><div class='input'> <span class='fu'>data</span>(<span class='no'>sim</span>)
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'> <span class='fu'>library</span>(<span class='no'>cmr</span>)</div><div class='output co'>#&gt; <span class='error'>Error in library(cmr): there is no package called ‘cmr’</span></div><div class='input'> <span class='fu'>data</span>(<span class='no'>sim</span>)
  <span class='no'>local.mbf</span><span class='kw'>=</span><span class='fu'>array</span>(<span class='fl'>NA</span>,<span class='fu'>c</span>(<span class='fl'>30</span>,<span class='fl'>30</span>,<span class='fl'>3</span>))
  <span class='no'>local.ci</span><span class='kw'>=</span><span class='fu'>array</span>(<span class='fl'>NA</span>,<span class='fu'>c</span>(<span class='fl'>30</span>,<span class='fl'>30</span>,<span class='fl'>3</span>))
  <span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>3</span>)
@@ -127,14 +110,8 @@ Attaching package: ‘cmr’
  <span class='no'>temp</span><span class='kw'>=</span><span class='fu'>cmr.local</span>(<span class='no'>data.data</span>[,,<span class='no'>i</span>,],<span class='no'>mask</span>,<span class='no'>aif</span>)
  <span class='no'>local.mbf</span>[,,<span class='no'>i</span>]<span class='kw'>=</span><span class='fu'>t</span>(<span class='fu'>as.matrix</span>(<span class='no'>temp</span>$<span class='no'>mbf</span>))
  <span class='no'>local.ci</span>[,,<span class='no'>i</span>]<span class='kw'>=</span><span class='fu'>t</span>(<span class='fu'>as.matrix</span>(<span class='no'>temp</span>$<span class='no'>ci</span>))
- }</div><strong class='error'>Error in mask[data.data[, , i, 1] != 0] = 1: Objekt &#39;data.data&#39; nicht gefunden</strong><div class='input'><span class='fu'>par</span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2</span>,<span class='fl'>1</span>))
-<span class='fu'><a href='imageMBF.html'>imageMBF</a></span>(<span class='no'>resp</span>,<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>5</span>))</div><strong class='error'>Error: &#39;tim.colors&#39; is not an exported object from &#39;namespace:graphics&#39;</strong><div class='input'><span class='fu'><a href='imageMBF.html'>imageMBF</a></span>(<span class='no'>local.mbf</span>,<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>5</span>))</div><div class='output'><strong class='text-warning'>Warning message:
-kein nicht-fehlendes Argument für min; gebe Inf zurück</strong></div><div class='output'><strong class='text-warning'>Warning message:
-kein nicht-fehlendes Argument für max; gebe -Inf zurück</strong></div><div class='output'><strong class='text-warning'>Warning message:
-kein nicht-fehlendes Argument für min; gebe Inf zurück</strong></div><div class='output'><strong class='text-warning'>Warning message:
-kein nicht-fehlendes Argument für max; gebe -Inf zurück</strong></div><div class='output'><strong class='text-warning'>Warning message:
-kein nicht-fehlendes Argument für min; gebe Inf zurück</strong></div><div class='output'><strong class='text-warning'>Warning message:
-kein nicht-fehlendes Argument für max; gebe -Inf zurück</strong></div><strong class='error'>Error in xrange[1]:xrange[2]: Resultat wäre zu langer Vektor</strong></pre>
+ }</div><div class='output co'>#&gt; <span class='error'>Error in mask[data.data[, , i, 1] != 0] = 1: object &#39;data.data&#39; not found</span></div><div class='input'><span class='fu'>par</span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2</span>,<span class='fl'>1</span>))
+<span class='fu'><a href='imageMBF.html'>imageMBF</a></span>(<span class='no'>resp</span>,<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>5</span>))</div><div class='output co'>#&gt; <span class='error'>Error in plot.new(): plot region too large</span></div><div class='input'><span class='fu'><a href='imageMBF.html'>imageMBF</a></span>(<span class='no'>local.mbf</span>,<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>5</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; <span class='error'>Error in xrange[1]:xrange[2]: result would be too long a vector</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

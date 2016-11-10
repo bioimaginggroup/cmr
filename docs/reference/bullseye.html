@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bullseye plot for cmr — bullseye • cmR</title>
+<title>Bullseye plot — bullseye • cmR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -54,17 +54,11 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
-</li>
-<li>
-  <a href="http://bioimaginggroup.github.io/cmR">cmR</a>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/cmR">
+  <a href="https://github.com/bioimaginggroup/cmR">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -80,25 +74,30 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bullseye plot for cmr</h1>
+    <h1>Bullseye plot</h1>
     </div>
 
     
-    <p>Bullseye plot for cmr</p>
+    <p>Bullseye plot</p>
     
 
-    <pre><span class='fu'>bullseye</span>(<span class='no'>werte</span>, <span class='kw'>zlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre><span class='fu'>bullseye</span>(<span class='no'>x</span>, <span class='kw'>lim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>werte</dt>
-      <dd></dd>
-      <dt>zlim</dt>
-      <dd></dd>
+      <dt>x</dt>
+      <dd>vector of length 16</dd>
+      <dt>lim</dt>
+      <dd>limits of x values</dd>
       <dt>reverse</dt>
-      <dd></dd>
+      <dd>boolean, reverse colors?</dd>
+      <dt>legend</dt>
+      <dd>boolean, add legend?</dd>
       <dt>text</dt>
-      <dd></dd>
+      <dd>boolean, should text legend be added?</dd>
+      <dt>cex</dt>
+      <dd>cex for text legend</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -106,6 +105,8 @@
     <p>plot</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>  <span class='fu'>bullseye</span>(<span class='fl'>1</span>:<span class='fl'>16</span>)</div><img src='bullseye-2.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -113,7 +114,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

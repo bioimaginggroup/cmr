@@ -2,23 +2,31 @@
 % Please edit documentation in R/bullseye.R
 \name{bullseye}
 \alias{bullseye}
-\title{Bullseye plot for cmr}
+\title{Bullseye plot}
 \usage{
-bullseye(werte, zlim = NULL, reverse = TRUE, text = TRUE, cex = 2)
+bullseye(x, lim = NULL, reverse = TRUE, legend = TRUE, text = TRUE,
+  cex = 1)
 }
 \arguments{
-\item{werte}{}
+\item{x}{vector of length 16}
 
-\item{zlim}{}
+\item{lim}{limits of x values}
 
-\item{reverse}{}
+\item{reverse}{boolean, reverse colors?}
 
-\item{text}{}
+\item{legend}{boolean, add legend?}
+
+\item{text}{boolean, should text legend be added?}
+
+\item{cex}{cex for text legend}
 }
 \value{
 plot
 }
 \description{
-Bullseye plot for cmr
+Bullseye plot
+}
+\examples{
+  bullseye(1:16)
 }
 

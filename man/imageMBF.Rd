@@ -2,7 +2,7 @@
 % Please edit documentation in R/image_mbf.R
 \name{imageMBF}
 \alias{imageMBF}
-\title{Title Plotting of (voxelwise) cardiac MBF}
+\title{Plotting of (voxelwise) cardiac MBF}
 \usage{
 imageMBF(img, zlim = NULL, reverse = TRUE)
 }
@@ -17,7 +17,7 @@ imageMBF(img, zlim = NULL, reverse = TRUE)
 plots
 }
 \description{
-Title Plotting of (voxelwise) cardiac MBF
+Plotting of (voxelwise) cardiac MBF
 }
 \examples{
 library(cmr)

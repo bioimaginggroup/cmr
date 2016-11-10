@@ -2,7 +2,7 @@
 % Please edit documentation in R/cmr_local.R
 \name{cmr.local}
 \alias{cmr.local}
-\title{Title Spline analysis of cardiovascular magnetic resonance imaging}
+\title{Spline analysis of cardiovascular magnetic resonance imaging}
 \usage{
 cmr.local(data, mask, input, quantiles = c(0.25, 0.75))
 }
@@ -19,7 +19,7 @@ cmr.local(data, mask, input, quantiles = c(0.25, 0.75))
 list of mbf (point estimation) and ci (credible interval)
 }
 \description{
-Title Spline analysis of cardiovascular magnetic resonance imaging
+Spline analysis of cardiovascular magnetic resonance imaging
 }
 \examples{
  library(cmr)

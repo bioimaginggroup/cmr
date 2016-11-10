@@ -2,7 +2,7 @@
 % Please edit documentation in R/cmr_space.R
 \name{cmr.space}
 \alias{cmr.space}
-\title{Title Spatial spline analysis of cardiovascular magnetic resonance imaging}
+\title{Spatial spline analysis of cardiovascular magnetic resonance imaging}
 \usage{
 cmr.space(data, mask, input, quantiles = c(0.25, 0.75))
 }
@@ -19,7 +19,7 @@ cmr.space(data, mask, input, quantiles = c(0.25, 0.75))
 list of mbf (point estimation) and ci (credible interval)
 }
 \description{
-Title Spatial spline analysis of cardiovascular magnetic resonance imaging
+Spatial spline analysis of cardiovascular magnetic resonance imaging
 }
 \examples{
 library(cmr)
