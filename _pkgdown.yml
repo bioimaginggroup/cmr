@@ -5,13 +5,9 @@ navbar:
       href: index.html
     - text: "Reference"
       href: reference/index.html
-    - text: "Articles"
-      href: articles/index.html
-    - text: "cmR"
-      href: http://bioimaginggroup.github.io/cmR
   right:
     - icon: fa-github fa-lg
-      href: https://github.com/cmR
+      href: https://github.com/bioimaginggroup/cmR
 home:
   links:
   - text: cmR github

@@ -1,4 +1,4 @@
-#' Title Plotting of (voxelwise) cardiac MBF 
+#' Plotting of (voxelwise) cardiac MBF 
 #'
 #' @param img 3d array ob MBF values
 #' @param zlim limits of MBF, default: NULL means zlim=c(0,max(img,na.rm=TRUE))

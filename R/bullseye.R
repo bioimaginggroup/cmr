@@ -1,16 +1,22 @@
-#' Bullseye plot for cmr
+#' Bullseye plot
 #'
-#' @param werte 
-#' @param zlim 
-#' @param reverse 
-#' @param text 
+#' @param x vector of length 16
+#' @param lim limits of x values
+#' @param reverse boolean, reverse colors?
+#' @param legend boolean, add legend?
+#' @param text boolean, should text legend be added?
+#' @param cex cex for text legend
 #'
 #' @return plot
 #' @export
 #' @import fields
-#'
-bullseye<-function(werte,zlim=NULL,reverse=TRUE,legend=TRUE,text=TRUE,cex=1)
+#' @example bullseye(1:16)
+bullseye<-function(x, lim=NULL,reverse=TRUE,legend=TRUE,text=TRUE,cex=1)
 {
+if (length(x)!=16)error("x has to be of length 16")
+werte=x
+zlim=lim
+
 if(is.null(zlim))zlim=c(0,max(werte,na.rm=TRUE))
 
 ziel0<-werte

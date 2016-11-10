@@ -1,34 +1,34 @@
-#' Title
+#' Pseudo bullseye plot
 #'
-#' @param mbf 
-#' @param zlim 
-#' @param text 
-#' @param reverse 
-#' @param center 
+#' @param x 3D array
+#' @param lim limits of x values
+#' @param reverse boolean, reverse colors?
+#' @param legend boolean, add legend?
+#' @param text boolean, should text legend be added?
+#' @param cex cex for text legend
+#' @param center boolean, should x be centered before plotting
 #'
-#' @return
+#' @return plots
 #' @export
-#'
-#' @examples
-pseudobullseye<-function(mbf,zlim=c(0,6),text=TRUE,reverse=FALSE,center=FALSE){
+pseudobullseye<-function(x, lim, legend=FALSE, text=TRUE, reverse=FALSE, center=FALSE, cex=2){
+  mbf=x
+  zlim=lim
   if (center)
   {
-    sum.na<-function(x)sum(x,na.rm=TRUE)
-    x<-apply(mbf,1,sum.na)!=0
-    xx<-sum(x)
-    y<-apply(mbf,2,sum.na)!=0
+    x1<-apply(mbf,1,sum,na.rm=TRUE)!=0
+    xx<-sum(x1)
+    y<-apply(mbf,2,sum,na.rm=TRUE)!=0
     yy<-sum(y)
-    xy<-36
-    mbf.neu<-array(NA,c(xy,xy,3))
-    for (i in 1:3)
+    mbf.neu<-array(NA,dim(x))
+    for (i in 1:dim(x)[3])
     {
-      x<-apply(mbf[,,i],1,sum.na)!=0
-      xi<-sum(x)
-      y<-apply(mbf[,,i],2,sum.na)!=0
+      x1<-apply(mbf[,,i],1,sum,na.rm=TRUE)!=0
+      xi<-sum(x1)
+      y<-apply(mbf[,,i],2,sum,na.rm=TRUE)!=0
       yi<-sum(y)
       x0<-floor((xy-xi)/2)
       y0<-floor((xy-yi)/2)
-      mbf.neu[x0+1:xi,y0+1:yi,i]=mbf[x,y,i]
+      mbf.neu[x0+1:xi,y0+1:yi,i]=mbf[x1,y,i]
     }
     mbf<-mbf.neu
   }
@@ -38,7 +38,7 @@ pseudobullseye<-function(mbf,zlim=c(0,6),text=TRUE,reverse=FALSE,center=FALSE){
   if(reverse)co=rev(tim.colors(64))
   image(mbf[,,3],zlim=zlim,col=co,axes=FALSE)
   if(text){
-    par(cex=2)
+    par(cex=cex)
     text(0.97,0.48,"LCX")
     text(0.15,0.83,"LAD")
     text(0.15,0.13,"RCA")
@@ -51,5 +51,4 @@ pseudobullseye<-function(mbf,zlim=c(0,6),text=TRUE,reverse=FALSE,center=FALSE){
   par(plt=c(.3,.7,.3,.7),new=TRUE)
   par(pty="s",bty="n")
   image(mbf[,,1],zlim=zlim,axes=FALSE,col=co)
-  
 }

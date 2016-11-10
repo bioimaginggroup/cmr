@@ -1,4 +1,4 @@
-#' Title Spatial spline analysis of cardiovascular magnetic resonance imaging
+#' Spatial spline analysis of cardiovascular magnetic resonance imaging
 #'
 #' @param data 3d array of CMR signal 
 #' @param mask 2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis
