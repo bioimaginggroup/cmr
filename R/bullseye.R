@@ -10,7 +10,8 @@
 #' @return plot
 #' @export
 #' @import fields
-#' @example bullseye(1:16)
+#' @examples
+#'   bullseye(1:16)
 bullseye<-function(x, lim=NULL,reverse=TRUE,legend=TRUE,text=TRUE,cex=1)
 {
 if (length(x)!=16)error("x has to be of length 16")
