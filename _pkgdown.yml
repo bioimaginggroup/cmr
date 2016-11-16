@@ -1,3 +1,7 @@
+templates:
+  params:
+    bootswatch: cerulean
+    
 navbar:
   type: inverse
   left:
@@ -16,3 +20,12 @@ articles:
 - title: "Vignettes"
   contents:
   - none
+reference:
+- title: cmR analysis
+  contents:
+  - starts_with("cmr")
+- title: Plotting
+  contents:
+  - bullseye
+  - pseudobullseye
+  - imageMBF
