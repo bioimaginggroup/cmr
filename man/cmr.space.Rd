@@ -38,4 +38,3 @@ par(mfrow=c(2,1))
 imageMBF(resp,zlim=c(0,5))
 imageMBF(space.mbf,zlim=c(0,5))
 }
-

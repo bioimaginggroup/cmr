@@ -37,4 +37,3 @@ par(mfrow=c(2,1))
 imageMBF(resp,zlim=c(0,5))
 imageMBF(local.mbf,zlim=c(0,5))
 }
-

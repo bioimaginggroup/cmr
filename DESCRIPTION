@@ -1,8 +1,8 @@
 Package: cmR
 Type: Package
 Title: Analysis of cardiac magnetic resonance images
-Version: 0.2.1
-Date: 2016-11-10
+Version: 0.2.2
+Date: 2017-02-20
 Author: Volker Schmid
 Authors@R: c(person("Volker", "Schmid", role = c("aut", "cre"),
 		     email = "volker.schmid@lmu.de"))
@@ -10,7 +10,7 @@ Maintainer: Volker Schmid <volker.schmid@lmu.de>
 Depends: Matrix, splines, fields, graphics
 Description: Analysis of cardiac magnetic resonance images
 License: GPL-3
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 URL: https://bioimaginggroup.github.io/cmr
 Suggests: knitr,
     rmarkdown

@@ -29,4 +29,3 @@ Bullseye plot
 \examples{
   bullseye(1:16)
 }
-

@@ -24,4 +24,3 @@ library(cmr)
 data(sim)
 image.mbf(resp)
 }
-

@@ -28,4 +28,3 @@ plots
 \description{
 Pseudo bullseye plot
 }
-

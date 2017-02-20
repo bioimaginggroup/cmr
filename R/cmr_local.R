@@ -167,7 +167,7 @@ tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
 for (voxel in 1:N)
 {
-  cat(paste("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bVoxel",voxel, "von", N))
+  cat(paste("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bVoxel",voxel, "of", N))
   Ct <- data[coord[1,voxel],coord[2,voxel],]
 DC <- Matrix::t(D.sparse)%*%Ct
 
