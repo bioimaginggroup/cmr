@@ -5,7 +5,7 @@
 \title{Bayesian analysis of cardiovascular magnetic resonance imaging}
 \usage{
 cmr(data, input, mask = NULL, method = "spatial", quantiles = c(0.25,
-  0.75))
+  0.75), cores = 1)
 }
 \arguments{
 \item{data}{3D or 4D array of CMR signal}
@@ -15,6 +15,8 @@ cmr(data, input, mask = NULL, method = "spatial", quantiles = c(0.25,
 \item{mask}{2D or 3D array of mask. Voxel with 0 or FALSE will be ommited from anaysis. Default NULL: use NA values in data as mask}
 
 \item{quantiles}{quantiles used for credible intervall, default: c(0.25, 0.75)}
+
+\item{cores}{number of cores for parallel computation, only with more slices}
 }
 \value{
 list of mbf (point estimation) and ci (credible interval)

@@ -8,7 +8,7 @@
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @export
 
-cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75),cores=1)
+cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), cores=1)
 {
   if (length(dim(data))==4)
   {

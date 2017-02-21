@@ -33,13 +33,13 @@ imageMBF(data[,,,30])
 ## Analysis
 
 ```{r localanalysis, cache=TRUE}
-local=cmr(data,aif,method="local")
+print(system.time({local=cmr(data,aif,method="local",cores=3)}))
 imageMBF(local$mbf,zlim=c(0,5))
 imageMBF(local$ci,zlim=c(0,.8))
 ```
 
 ```{r spatialanalysis, cache=TRUE}
-spatial=cmr(data,aif,method="spatial")
+print(system.time({spatial=cmr(data,aif,method="spatial",cores=3)}))
 pseudobullseye(space$mbf,zlim=c(0,5))
 pseudobullseye(space$ci,zlim=c(0,5))
 pseudobullseye(resp,zlim=c(0,5))
