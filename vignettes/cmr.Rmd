@@ -32,44 +32,17 @@ imageMBF(data[,,,30])
 
 ## Analysis
 
-```{r analysis, cache=TRUE}
+```{r localanalysis, cache=TRUE}
 local=cmr(data,aif,method="local")
+imageMBF(local$mbf,zlim=c(0,5))
+imageMBF(local$ci,zlim=c(0,.8))
+```
+
+```{r spatialanalysis, cache=TRUE}
 spatial=cmr(data,aif,method="spatial")
-
-image.mbf(resp,zlim=c(0,5))
-image.mbf(space$mbf,zlim=c(0,5))
-image.mbf(local$mbf,zlim=c(0,5))
+pseudobullseye(space$mbf,zlim=c(0,5))
+pseudobullseye(space$ci,zlim=c(0,5))
+pseudobullseye(resp,zlim=c(0,5))
 ```
 
 
-image.mbf(space$ci,zlim=c(0,.8))
-
-image.mbf(local$ci,zlim=c(0,.8))
-
-
-par(fin=10*c(dim(resp[,,1])/max(dim(resp[,,1]))))
-par(mai=c(0,0,0,0))
-par(cex=2)
-image.plot(resp[,,1],zlim=c(0,5),legend.only=TRUE,legend.width=3.5)
-
-image.mbf(space.mbf,zlim=c(0,5))
-
-image.mbf(local.mbf,zlim=c(0,5))
-
-image.mbf(space.ci,zlim=c(0,.8))
-
-image.mbf(local.ci,zlim=c(0,.8))
-
-
-
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

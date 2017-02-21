@@ -4,21 +4,24 @@
 #' @param input input function
 #' @param mask 2D or 3D array of mask. Voxel with 0 or FALSE will be ommited from anaysis. Default NULL: use NA values in data as mask
 #' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
-#'
+#' @param cores number of cores for parallel computation, only with more slices
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @export
 
-cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75))
+cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75),cores=1)
 {
   if (length(dim(data))==4)
   {
     mbf <- ci <- array(NA,dim(data)[1:3])
     I <- 1:dim(mbf)[3]
-    if (cores>1)temp<-mclapply(I,do.cmr,data,input,mask,method)
-
-            temp=cmr.space(data[,,i,],mask,aif)
-        mbf[,,i]=t(as.matrix(temp$mbf))
-        ci[,,i]=t(as.matrix(temp$ci))
+    if (cores>1)temp<-parallel::mclapply(I,do.cmr,data,input,mask,method,mc.cores=cores)
+    if (cores==1)temp<-lapply(I,do.cmr,data,input,mask,method,mc.cores=cores)
+    
+    for (i in I)
+      {
+        mbf[,,i]=t(as.matrix(temp[[i]]$mbf))
+        ci[,,i]=t(as.matrix(temp[[i]]$ci))
+    }
   }
   else
   {
