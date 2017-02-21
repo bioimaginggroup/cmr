@@ -4,7 +4,7 @@
 \alias{cmr.local}
 \title{Spline analysis of cardiovascular magnetic resonance imaging}
 \usage{
-cmr.local(data, mask, input, quantiles = c(0.25, 0.75))
+cmr.local(data, mask, input, quantiles = c(0.25, 0.75), cores = 1)
 }
 \arguments{
 \item{data}{3d array of CMR signal}
@@ -14,6 +14,8 @@ cmr.local(data, mask, input, quantiles = c(0.25, 0.75))
 \item{input}{input function}
 
 \item{quantiles}{quantiles used for credible intervall, default: c(0.25, 0.75)}
+
+\item{cores}{number of cores to use in parallel computing}
 }
 \value{
 list of mbf (point estimation) and ci (credible interval)
