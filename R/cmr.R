@@ -6,6 +6,7 @@
 #' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
 #' @param cores number of cores for parallel computation, only with more slices
 #' @return list of mbf (point estimation) and ci (credible interval)
+#' @importFrom parallel mclapply
 #' @export
 
 cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), cores=1)
@@ -14,7 +15,7 @@ cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), co
   {
     mbf <- ci <- array(NA,dim(data)[1:3])
     I <- 1:dim(mbf)[3]
-    if (cores>1)temp<-parallel::mclapply(I,do.cmr,data,input,mask,method,mc.cores=cores)
+    if (cores>1)temp<-parallel::mclapply(I,do.cmr,data,input,mask,method,mc.cores=round(cores/(dim(mbf)[3]),0))
     if (cores==1)temp<-lapply(I,do.cmr,data,input,mask,method,mc.cores=cores)
     
     for (i in I)
@@ -64,7 +65,7 @@ do.cmr<-function(i,data,input,mask,method)
   {
     mask0<-mask[,,i,]
   }
-  if (method=="local")temp=cmr.local(data[,,i,],mask0,aif)
-  if (method=="spatial")temp=cmr.space(data[,,i,],mask0,aif)
+  if (method=="local")temp=cmr.local(data[,,i,],mask0,input)
+  if (method=="spatial")temp=cmr.space(data[,,i,],mask0,input)
   return(temp)
 }

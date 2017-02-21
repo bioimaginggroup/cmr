@@ -7,9 +7,9 @@
 #'
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @export
-#' @import splines stats
+#' @import splines Matrix
 #' @examples 
-#' library(cmr)
+#' library(cmR)
 #' data(sim)
 #' space.mbf=array(NA,c(30,30,3))
 #' space.ci=array(NA,c(30,30,3))
@@ -40,12 +40,12 @@ zeit<-((1:T)-1)/60
 #knots<-knots[-seq(10,18,by=2)]
 knots=c(seq(-5,1,by=2),seq(3,13,by=1),seq(14,36,by=2))
 knots=seq(-2,33,length=24)
-knots<-knots[-seq(14,30,by=2)]
+knots<-splines::knots[-seq(14,30,by=2)]
 knots=seq(-1,T+1,length=T-2)
 knots=knots/60#-1/60
 k<-4
 p<-length(knots)-k
-B<-splineDesign(knots,zeit,k,outer.ok=TRUE)
+B<-splines::splineDesign(knots,zeit,k,outer.ok=TRUE)
 
 # compute A
 

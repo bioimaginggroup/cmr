@@ -4,6 +4,7 @@
 #' @param mask 2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis
 #' @param input input function
 #' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
+#' @param cores number of cores to use in parallel computing
 #'
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @export
@@ -24,7 +25,7 @@
 #' par(mfrow=c(2,1))
 #' imageMBF(resp,zlim=c(0,5))
 #' imageMBF(local.mbf,zlim=c(0,5))
-cmr.local<-function(data,mask,input,quantiles=c(.25,.75))
+cmr.local<-function(data,mask,input,quantiles=c(.25,.75), cores=1)
 {
 XX<-dim(data)[1]
 YY<-dim(data)[2]
@@ -113,9 +114,6 @@ tauq<-rep(1,p-2)
 
 Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
 
-#prepare R
-
-
 coord<-c()
 
 for (i in 2:XX)
@@ -125,38 +123,9 @@ if (!is.na(mask[i,j]))
 coord<-cbind(coord,c(i,j))
 }
 
-nei<-c()
-for (i in 1:(N-1))
-for (j in (i+1):N)
-if(sum((coord[,i]-coord[,j])^2)<2)
-nei<-cbind(nei,c(i,j))
-
-NEI <- dim(nei)[2]
-
-R.x <- c(1:N,nei[1,],nei[2,])
-R.y <- c(1:N,nei[2,],nei[1,])
-
-taur2R<-array(0,c(2*NEI+N,NEI))
-for (j in 1:NEI)
-{
-taur2R[nei[1,j],j]<-taur2R[nei[1,j],j]+1
-taur2R[nei[2,j],j]<-taur2R[nei[2,j],j]+1
-taur2R[N+j,j]<- -1
-taur2R[N+NEI+j]<- -1
-}
-
-taur<-rep(1,NEI)
-R.sparse=sparseMatrix(R.x,R.y,x=as.vector(taur2R%*%taur),dims=c(N,N))
-
-
-QR=kronecker(R.sparse,Q.sparse)
 taueps=rep(1/10,N)
 
 Q.klein<-matrix(c(1,-2,1,-2,4,-2,1,-2,1),nrow=3)
-R.klein<-matrix(c(1,-1,-1,1),nrow=2)
-
-
-## lokale Sch?tzung
 
 mbf.local=array(NA,c(XX,YY,300))
 
@@ -165,53 +134,11 @@ Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
 taueps.local=1/10
 tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
+temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local ,DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores)
+  
 for (voxel in 1:N)
 {
-  cat(paste("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bVoxel",voxel, "of", N))
-  Ct <- data[coord[1,voxel],coord[2,voxel],]
-DC <- Matrix::t(D.sparse)%*%Ct
-
-for (iter in 1:1000)
-{
-# update beta
-
-L = Q.sparse + taueps.local*DD
-b = taueps.local*DC
-L=Matrix::chol(as.matrix(L))
-w=Matrix::solve(Matrix::t(L),b)
-mu=Matrix::solve(L,w)
-z=rnorm(p)
-v=Matrix::solve(L,z)
-beta.local=mu+v
-
-a=1+T/2
-bb=1e-3+0.5*sum((D.sparse%*%beta.local-Ct)^2)
-taueps.local=rgamma(1,a,bb)
-
-for (i in 1:(p-2))
-{
-which=rep(FALSE,p)
-which[i:(i+2)]=TRUE
-aa=1+1/2
-bb=1e-3+0.5*beta.local[which]%*%Q.klein%*%beta.local[which]
-tauq.local[i]=rgamma(1,aa,bb[1,1])
-}
-
-Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
-
-if (((iter%/%3)==iter/3)&iter>100)
-{
-tauq.l.s=cbind(tauq.l.s,tauq.local)
-taueps.l.s=c(taueps.l.s,taueps.local)
-beta.l.s=cbind(beta.l.s,beta.local[,1])
-}
-}
-
-resp.local<-c()
-for (i in 1:300)
-resp.local<-cbind(resp.local,B%*%beta.l.s[,i])
-
-mbf.local[coord[1,voxel],coord[2,voxel],]=apply(resp.local,2,max)
+mbf.local[coord[1,voxel],coord[2,voxel],]=temp[[i]]
 }
 
 resp.l=apply(mbf.local,c(1,2),median)
@@ -271,6 +198,6 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local,DD,T, p, B
   resp.local<-c()
   for (i in 1:300)
     resp.local<-cbind(resp.local,B%*%beta.l.s[,i])
-  
+  return(resp.local)
 }
 

@@ -7,7 +7,7 @@ Author: Volker Schmid
 Authors@R: c(person("Volker", "Schmid", role = c("aut", "cre"),
 		     email = "volker.schmid@lmu.de"))
 Maintainer: Volker Schmid <volker.schmid@lmu.de>
-Depends: Matrix, splines, fields, graphics
+Imports: Matrix, splines, fields, graphics
 Description: Analysis of cardiac magnetic resonance images
 License: GPL-3
 RoxygenNote: 6.0.1

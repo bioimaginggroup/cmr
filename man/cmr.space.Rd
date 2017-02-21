@@ -22,7 +22,7 @@ list of mbf (point estimation) and ci (credible interval)
 Spatial spline analysis of cardiovascular magnetic resonance imaging
 }
 \examples{
-library(cmr)
+library(cmR)
 data(sim)
 space.mbf=array(NA,c(30,30,3))
 space.ci=array(NA,c(30,30,3))

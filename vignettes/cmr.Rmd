@@ -33,7 +33,7 @@ imageMBF(data[,,,30])
 ## Analysis
 
 ```{r localanalysis, cache=TRUE}
-print(system.time({local=cmr(data,aif,method="local",cores=3)}))
+print(system.time({local=cmr(data,aif,method="local",cores=24)}))
 imageMBF(local$mbf,zlim=c(0,5))
 imageMBF(local$ci,zlim=c(0,.8))
 ```
