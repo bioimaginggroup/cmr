@@ -44,7 +44,7 @@ farbe=fields::tim.colors(64)
 if(reverse)farbe=rev(farbe)
 #add  space for legend
 for (i in 1:floor(dim(fullimg)[1]/6))fullimg <- rbind(fullimg,rep(NA,diff(yrange)+1))
-image(fullimg,zlim=zlim,axes=FALSE,col = farbe)
-image.plot(fullimg,zlim=zlim,legend.only=TRUE,legend.width=1.8,add=TRUE)
+graphics::image(fullimg,zlim=zlim,axes=FALSE,col = farbe)
+fields::image.plot(fullimg,zlim=zlim,legend.only=TRUE,legend.width=1.8,add=TRUE)
 }
 
