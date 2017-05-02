@@ -155,6 +155,8 @@ cat("\n")
 return(list("mbf"=resp.l,"ci"=resp.l4))
 }
 
+tauq.l.s<-taueps.l.s<-beta.l.s<-c()
+
 cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD,T, p, B, Q.klein, Q.x, Q.y, tauq2Q){
   Ct <- data[coord[1,voxel],coord[2,voxel],]
   DC <- Matrix::t(D.sparse)%*%Ct
