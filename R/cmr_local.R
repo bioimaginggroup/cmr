@@ -45,7 +45,7 @@ knots<-seq(-1,T+1,length=T-2)
 knots=knots/60#-1/60
 k<-4
 p<-length(knots)-k
-B<-splineDesign(knots,zeit,k,outer.ok=TRUE)
+B<-splines::splineDesign(knots,zeit,k,outer.ok=TRUE)
 
 # compute A
 
@@ -77,7 +77,7 @@ j=c(j,jj)
 x=c(x,D[ii,jj])
 }
 
-D.sparse=sparseMatrix(i, j, x=x, dims=c(T,p))
+D.sparse=Matrix::sparseMatrix(i, j, x=x, dims=c(T,p))
 DD<-Matrix::t(D.sparse)%*%D.sparse
 
 DC <- Ct <- c()
@@ -112,7 +112,7 @@ tauq2Q<-tauq2Q[-(p*5-8+c(0,4)),]
 
 tauq<-rep(1,p-2)
 
-Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
+Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq),dims=c(p,p))
 
 coord<-c()
 
@@ -130,11 +130,11 @@ Q.klein<-matrix(c(1,-2,1,-2,4,-2,1,-2,1),nrow=3)
 mbf.local=array(NA,c(XX,YY,300))
 
 tauq.local<-rep(1,p-2)
-Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
+Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
 taueps.local=1/10
 tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
-temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local ,DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores)
+temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores)
   
 for (voxel in 1:N)
 {
@@ -155,7 +155,7 @@ cat("\n")
 return(list("mbf"=resp.l,"ci"=resp.l4))
 }
 
-cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local,DD,T, p, B, Q.klein, Q.x, Q.y, tauq2Q){
+cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD,T, p, B, Q.klein, Q.x, Q.y, tauq2Q){
   Ct <- data[coord[1,voxel],coord[2,voxel],]
   DC <- Matrix::t(D.sparse)%*%Ct
   
@@ -185,7 +185,7 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local,DD,T, p, B
       tauq.local[i]=rgamma(1,aa,bb[1,1])
     }
     
-    Q.sparse=sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
+    Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
     
     if (((iter%/%3)==iter/3)&iter>100)
     {
