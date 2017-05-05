@@ -40,9 +40,9 @@ imageMBF(local$ci,zlim=c(0,.8))
 
 ```{r spatialanalysis, cache=TRUE}
 print(system.time({spatial=cmr(data,aif,method="spatial",cores=2)}))
-pseudobullseye(space$mbf,zlim=c(0,5))
-pseudobullseye(space$ci,zlim=c(0,5))
-pseudobullseye(resp,zlim=c(0,5))
+pseudobullseye(space$mbf,lim=c(0,5))
+pseudobullseye(space$ci,lim=c(0,5))
+pseudobullseye(resp,lim=c(0,5))
 ```
 
 

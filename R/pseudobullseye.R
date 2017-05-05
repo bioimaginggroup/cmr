@@ -10,7 +10,7 @@
 #'
 #' @return plots
 #' @export
-pseudobullseye<-function(x, lim, legend=FALSE, text=TRUE, reverse=FALSE, center=FALSE, cex=2){
+pseudobullseye<-function(x, lim=range(data,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=FALSE, cex=2){
   mbf=x
   zlim=lim
   if (center)
