@@ -39,7 +39,7 @@ fullimg=rbind(fullimg,img[xrange[1]:xrange[2],yrange[1]:yrange[2],i])
 fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 par(pin=5*c(dim(fullimg)/max(dim(fullimg))))
-#par(mai=c(0,0,0,0))
+par(mai=rep(.1,4))
 farbe=fields::tim.colors(64)
 if(reverse)farbe=rev(farbe)
 #add  space for legend

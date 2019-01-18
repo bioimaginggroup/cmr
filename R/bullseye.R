@@ -9,7 +9,7 @@
 #'
 #' @return plot
 #' @export
-#' @importFrom fields image.plot
+#' @import fields 
 #' @importFrom graphics polygon
 #' @examples
 #'   bullseye(1:16)
@@ -27,7 +27,7 @@ ziel<-ziel/(zlim[2]-zlim[1])
 ziel[ziel>=1]<-1
 
 colo<-rev(fields::tim.colors(265)[-265])
-if(reverse)colo<-tim.colors(265)[-265]
+if(reverse)colo<-fields::tim.colors(265)[-265]
 par(mai=c(0,0,0,0))
 plot(c(0,1),c(0,1),col="white",axes=FALSE,asp=1,ylab="",xlab="")
  
