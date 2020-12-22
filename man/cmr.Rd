@@ -4,8 +4,14 @@
 \alias{cmr}
 \title{Bayesian analysis of cardiovascular magnetic resonance imaging}
 \usage{
-cmr(data, input, mask = NULL, method = "spatial", quantiles = c(0.25,
-  0.75), cores = 1)
+cmr(
+  data,
+  input,
+  mask = NULL,
+  method = "spatial",
+  quantiles = c(0.25, 0.75),
+  cores = 1
+)
 }
 \arguments{
 \item{data}{3D or 4D array of CMR signal}

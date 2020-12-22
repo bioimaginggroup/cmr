@@ -4,8 +4,15 @@
 \alias{pseudobullseye}
 \title{Pseudo bullseye plot}
 \usage{
-pseudobullseye(x, lim = range(data, na.rm = TRUE), legend = FALSE,
-  text = TRUE, reverse = FALSE, center = FALSE, cex = 2)
+pseudobullseye(
+  x,
+  lim = range(data, na.rm = TRUE),
+  legend = FALSE,
+  text = TRUE,
+  reverse = FALSE,
+  center = FALSE,
+  cex = 2
+)
 }
 \arguments{
 \item{x}{3D array}

@@ -16,7 +16,7 @@ cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), co
     mbf <- ci <- array(NA,dim(data)[1:3])
     I <- 1:dim(mbf)[3]
     if (cores>1)temp<-parallel::mclapply(I,do.cmr,data,input,mask,method,mc.cores=round(cores/(dim(mbf)[3]),0))
-    if (cores==1)temp<-lapply(I,do.cmr,data,input,mask,method,mc.cores=cores)
+    if (cores==1)temp<-lapply(I,do.cmr,data,input,mask,method)
     
     for (i in I)
       {

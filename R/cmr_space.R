@@ -40,7 +40,7 @@ zeit<-((1:T)-1)/60
 #knots<-knots[-seq(10,18,by=2)]
 knots=c(seq(-5,1,by=2),seq(3,13,by=1),seq(14,36,by=2))
 knots=seq(-2,33,length=24)
-knots<-splines::knots[-seq(14,30,by=2)]
+knots<-knots[-seq(14,30,by=2)]
 knots=seq(-1,T+1,length=T-2)
 knots=knots/60#-1/60
 k<-4
@@ -273,10 +273,6 @@ response<-array(NA,c(T,N,NRI))
 for (i in 1:NRI)
 for (j in 1:N)
 response[,j,i]<-B%*%beta.s[(1:p)+(j-1)*p,i]
-
-response.med=apply(response,c(1,2),median)
-
-resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(response.med,2,max),dims=c(XX,YY))
 
 resp.max=apply(response,2:3,max)
 q4<-function(x)quantile(x,c(.25,.75),na.rm=TRUE)

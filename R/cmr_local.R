@@ -127,8 +127,6 @@ taueps=rep(1/10,N)
 
 Q.klein<-matrix(c(1,-2,1,-2,4,-2,1,-2,1),nrow=3)
 
-mbf.local=array(NA,c(XX,YY,300))
-
 tauq.local<-rep(1,p-2)
 Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
 taueps.local=1/10
@@ -136,23 +134,23 @@ tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
 temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores)
   
+NRI<-300
+response=array(NA,c(T,N,NRI))
+
 for (voxel in 1:N)
 {
-mbf.local[coord[1,voxel],coord[2,voxel],]=temp[[i]]
+response[,voxel,]=temp[[voxel]]
 }
 
-resp.l=apply(mbf.local,c(1,2),median)
-resp.l=t(resp.l)
-resp.l=resp.l[!is.na(resp.l)]
-resp.l<-sparseMatrix(coord[2,],coord[1,],x=resp.l,dims=c(XX,YY))
+resp.max=apply(response,2:3,max)
 q4<-function(x)quantile(x,c(.25,.75),na.rm=TRUE)
-resp.l4=apply(mbf.local,c(1,2),q4)
-resp.l4=resp.l4[2,,]-resp.l4[1,,]
-resp.l4=t(resp.l4)
-resp.l4=resp.l4[!is.na(resp.l4)]
-resp.l4<-sparseMatrix(coord[2,],coord[1,],x=resp.l4,dims=c(XX,YY))
-cat("\n")
-return(list("mbf"=resp.l,"ci"=resp.l4))
+resp.q4=apply(resp.max,1,q4)
+resp.q4=resp.q4[2,]-resp.q4[1,]
+
+resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,median),dims=c(XX,YY))
+resp.i4<-Matrix::sparseMatrix(coord[1,],coord[2,],x=resp.q4,dims=c(XX,YY))
+
+return(list("mbf"=resp.i,"ci"=resp.i4))
 }
 
 tauq.l.s<-taueps.l.s<-beta.l.s<-c()

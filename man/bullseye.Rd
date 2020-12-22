@@ -4,8 +4,7 @@
 \alias{bullseye}
 \title{Bullseye plot}
 \usage{
-bullseye(x, lim = NULL, reverse = TRUE, legend = TRUE, text = TRUE,
-  cex = 1)
+bullseye(x, lim = NULL, reverse = TRUE, legend = TRUE, text = TRUE, cex = 1)
 }
 \arguments{
 \item{x}{vector of length 16}
