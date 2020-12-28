@@ -9,9 +9,8 @@
 #' @importFrom graphics par plot polygon
 #'
 #' @examples
-#' library(cmr)
 #' data(sim)
-#' image.mbf(resp)
+#' imageMBF(resp)
 imageMBF<-function(img,zlim=NULL,reverse=TRUE)
 {
 Z=dim(img)[3]

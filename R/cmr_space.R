@@ -7,7 +7,8 @@
 #'
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @export
-#' @import splines Matrix
+#' @import splines Matrix 
+#' @importFrom stats rnorm rgamma median quantile
 #' @examples 
 #' library(cmR)
 #' data(sim)
@@ -16,8 +17,8 @@
 #' for (i in 1:3)
 #' {
 #' mask=array(NA,c(30,30))
-#' mask[data.data[,,i,1]!=0]=1
-#' temp=cmr.space(data.data[,,i,],mask,aif)
+#' mask[data[,,i,1]!=0]=1
+#' temp=cmr.space(data[,,i,],mask,aif)
 #' space.mbf[,,i]=t(as.matrix(temp$mbf))
 #' space.ci[,,i]=t(as.matrix(temp$ci))
 #' }
@@ -195,14 +196,15 @@ for (iter in 1:200)
 {
 
 # update beta
-QR=Matrix::kronecker(diag(rep(1,N)),Q.sparse)+kronecker(R.sparse,diag(rep(1,p)))
+QR=Matrix::kronecker(Matrix::Diagonal(N),Q.sparse)+Matrix::kronecker(R.sparse,Matrix::Diagonal(p))
 
 L = QR + IDD
+L=Matrix::Cholesky(L)
+L=methods::as(L,"sparseMatrix")
 b = IDC
-L=Matrix::chol(as.matrix(L))
 w=Matrix::solve(Matrix::t(L),b)
 mu=Matrix::solve(L,w)
-z=rnorm(p*N)
+z=stats::rnorm(p*N)
 v=Matrix::solve(L,z)
 beta=mu+v
 
@@ -210,7 +212,7 @@ for (i in 1:N)
 {
 a=1+T/2
 bb=1e-3+sum(0.5*(D.sparse%*%beta[(1:p)+(i-1)*p]-Ct[(1:T)+(i-1)*T])^2)
-taueps[i]=rgamma(1,a,bb)
+taueps[i]=stats::rgamma(1,a,bb)
 }
 
 IDD = Matrix::kronecker(Diagonal(N,taueps),DD)
@@ -275,11 +277,11 @@ for (j in 1:N)
 response[,j,i]<-B%*%beta.s[(1:p)+(j-1)*p,i]
 
 resp.max=apply(response,2:3,max)
-q4<-function(x)quantile(x,c(.25,.75),na.rm=TRUE)
+q4<-function(x)stats::quantile(x,c(.25,.75),na.rm=TRUE)
 resp.q4=apply(resp.max,1,q4)
 resp.q4=resp.q4[2,]-resp.q4[1,]
 
-resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,median),dims=c(XX,YY))
+resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,stats::median),dims=c(XX,YY))
 resp.i4<-Matrix::sparseMatrix(coord[1,],coord[2,],x=resp.q4,dims=c(XX,YY))
 
 return(list("mbf"=resp.i,"ci"=resp.i4))

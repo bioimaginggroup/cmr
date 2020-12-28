@@ -6,7 +6,7 @@
 \usage{
 pseudobullseye(
   x,
-  lim = range(data, na.rm = TRUE),
+  lim = range(x, na.rm = TRUE),
   legend = FALSE,
   text = TRUE,
   reverse = FALSE,

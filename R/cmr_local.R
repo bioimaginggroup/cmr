@@ -8,7 +8,8 @@
 #'
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @export
-#' @import splines Matrix 
+#' @import splines Matrix parallel 
+#' @importFrom stats rnorm rgamma median quantile
 #' 
 #' @examples
 #'  library(cmR)
@@ -130,7 +131,6 @@ Q.klein<-matrix(c(1,-2,1,-2,4,-2,1,-2,1),nrow=3)
 tauq.local<-rep(1,p-2)
 Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
 taueps.local=1/10
-tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
 temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores)
   
@@ -143,19 +143,19 @@ response[,voxel,]=temp[[voxel]]
 }
 
 resp.max=apply(response,2:3,max)
-q4<-function(x)quantile(x,c(.25,.75),na.rm=TRUE)
+q4<-function(x)stats::quantile(x,c(.25,.75),na.rm=TRUE)
 resp.q4=apply(resp.max,1,q4)
 resp.q4=resp.q4[2,]-resp.q4[1,]
 
-resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,median),dims=c(XX,YY))
+resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,stats::median),dims=c(XX,YY))
 resp.i4<-Matrix::sparseMatrix(coord[1,],coord[2,],x=resp.q4,dims=c(XX,YY))
 
 return(list("mbf"=resp.i,"ci"=resp.i4))
 }
 
-tauq.l.s<-taueps.l.s<-beta.l.s<-c()
 
 cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD,T, p, B, Q.klein, Q.x, Q.y, tauq2Q){
+  tauq.l.s<-taueps.l.s<-beta.l.s<-c()
   Ct <- data[coord[1,voxel],coord[2,voxel],]
   DC <- Matrix::t(D.sparse)%*%Ct
   
@@ -165,16 +165,17 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.loca
     
     L = Q.sparse + taueps.local*DD
     b = taueps.local*DC
-    L=Matrix::chol(as.matrix(L))
+    L=Matrix::Cholesky(L)
+    L=methods::as(L,"sparseMatrix")
     w=Matrix::solve(Matrix::t(L),b)
     mu=Matrix::solve(L,w)
-    z=rnorm(p)
+    z=stats::rnorm(p)
     v=Matrix::solve(L,z)
     beta.local=mu+v
     
     a=1+T/2
     bb=1e-3+0.5*sum((D.sparse%*%beta.local-Ct)^2)
-    taueps.local=rgamma(1,a,bb)
+    taueps.local=stats::rgamma(1,a,bb)
     
     for (i in 1:(p-2))
     {

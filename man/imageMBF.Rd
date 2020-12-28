@@ -20,7 +20,6 @@ plots
 Plotting of (voxelwise) cardiac MBF
 }
 \examples{
-library(cmr)
 data(sim)
-image.mbf(resp)
+imageMBF(resp)
 }
