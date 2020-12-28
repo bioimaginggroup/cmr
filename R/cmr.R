@@ -25,7 +25,7 @@ cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), co
         ci[,,i]=t(as.matrix(temp[[i]]$ci))
     }
   }
-  else
+  if (length(dim(data))==3)
   {
     mbf <- ci <- array(NA,dim(data)[1:2])
     if (method=="local")
@@ -51,7 +51,9 @@ cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), co
       ci=t(as.matrix(temp$ci))
     }
   }
-    
+  if (length(dim(data))>4){return(NULL)}
+  if (length(dim(data))<2){return(NULL)}
+  
   return(list("mbf"=mbf,"ci"=ci))
 }
 

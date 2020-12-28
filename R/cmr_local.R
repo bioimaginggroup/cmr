@@ -3,7 +3,7 @@
 #' @param data 3d array of CMR signal 
 #' @param mask 2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis
 #' @param input input function
-#' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
+#' @param quantiles quantiles used for credible interval, default: c(0.25, 0.75)
 #' @param cores number of cores to use in parallel computing
 #'
 #' @return list of mbf (point estimation) and ci (credible interval)
