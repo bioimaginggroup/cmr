@@ -25,7 +25,7 @@ pseudobullseye(
 
 \item{reverse}{boolean, reverse colors?}
 
-\item{center}{boolean, should x be centered before plotting}
+\item{center}{boolean, should input x be centered before plotting}
 
 \item{cex}{cex for text legend}
 }

@@ -1,18 +1,18 @@
 Package: cmR
 Type: Package
 Title: Analysis of Cardiac Magnetic Resonance Images
-Version: 0.2.12
+Version: 0.2.13
 Date: 2021-03-12
 Author: Volker Schmid [aut, cre]
 Authors@R: c(person("Volker", "Schmid", role = c("aut", "cre"),
 		     email = "volker.schmid@lmu.de"))
 Maintainer: Volker Schmid <volker.schmid@lmu.de>
 Depends: R (>= 3.5.0)
-Imports: Matrix, splines, fields, graphics
+Imports: Matrix, splines, fields, graphics, parallel
 Description: Analysis of cardiac magnetic resonance images. Computes maximum response using spatial and voxel wise spline based Bayesian model.
 License: GPL-3
 RoxygenNote: 7.1.1
-URL: https://bioimaginggroup.github.io/cmr
+URL: https://bioimaginggroup.github.io/cmr/
 Suggests: 
     knitr,
     rmarkdown,
