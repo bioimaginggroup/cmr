@@ -1,3 +1,14 @@
+home:
+  title: Analysis of Cardiac Magnetic Resonance Images
+  description: Analysis of cardiac magnetic resonance images. Computes maximum response using spatial and voxel wise spline based Bayesian model.
+  links:
+  - text: IEEE TMI article
+    href: https://ieeexplore.ieee.org/document/5706368
+  - text: cmR on github
+    href: https://github.com/bioimaginggroup/cmR
+  - text: Bayesian Bioimaging and Spatial Statistics group
+    href: https://www.bioimg.statistik.uni-muenchen.de/index.html
+
 templates:
   params:
     bootswatch: cerulean
@@ -12,10 +23,7 @@ navbar:
   right:
     - icon: fa-github fa-lg
       href: https://github.com/bioimaginggroup/cmR
-home:
-  links:
-  - text: cmR github
-    href: https://github.com/bioimaginggroup/cmR
+
 articles:
 - title: "Vignettes"
   contents:
