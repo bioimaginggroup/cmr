@@ -9,7 +9,7 @@
 #' @importFrom graphics par plot polygon
 #'
 #' @examples
-#' data(sim)
+#' data(cmrsim)
 #' imageMBF(resp)
 imageMBF<-function(img,zlim=NULL,reverse=TRUE)
 {

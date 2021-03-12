@@ -11,7 +11,7 @@
 #' @importFrom stats rnorm rgamma median quantile
 #' @examples 
 #' library(cmR)
-#' data(sim)
+#' data(cmrsim)
 #' space.mbf=array(NA,c(30,30,3))
 #' space.ci=array(NA,c(30,30,3))
 #' for (i in 1:3)

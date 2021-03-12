@@ -13,7 +13,7 @@
 #' 
 #' @examples
 #'  library(cmR)
-#'  data(sim)
+#'  data(cmrsim)
 #'  local.mbf=array(NA,c(30,30,3))
 #'  local.ci=array(NA,c(30,30,3))
 #'  for (i in 1:3)

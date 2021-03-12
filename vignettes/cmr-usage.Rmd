@@ -22,7 +22,7 @@ library(cmR)
 We use a simulated data set and add random white noise.
 
 ```{r simulate, cache=TRUE}
-data(sim)
+data(cmrsim)
 for (i in 1:dim(data)[1])
 for (j in 1:dim(data)[2])
 for (k in 1:3)

@@ -6,7 +6,7 @@
 #' @param legend boolean, add legend?
 #' @param text boolean, should text legend be added?
 #' @param cex cex for text legend
-#' @param center boolean, should x be centered before plotting
+#' @param center boolean, should input x be centered before plotting
 #'
 #' @return plots
 #' @export

@@ -13,7 +13,7 @@ cmr.local(data, mask, input, quantiles = c(0.25, 0.75), cores = 1)
 
 \item{input}{input function}
 
-\item{quantiles}{quantiles used for credible intervall, default: c(0.25, 0.75)}
+\item{quantiles}{quantiles used for credible interval, default: c(0.25, 0.75)}
 
 \item{cores}{number of cores to use in parallel computing}
 }
@@ -25,7 +25,7 @@ Spline analysis of cardiovascular magnetic resonance imaging
 }
 \examples{
  library(cmR)
- data(sim)
+ data(cmrsim)
  local.mbf=array(NA,c(30,30,3))
  local.ci=array(NA,c(30,30,3))
  for (i in 1:3)

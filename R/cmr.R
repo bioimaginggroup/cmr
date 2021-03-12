@@ -46,7 +46,7 @@ cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), co
         mask=array(NA,c(30,30))
         mask[data[,,i]!=0]=1
       }
-      temp=cmr.space(data,mask,aif)
+      temp=cmr.space(data,mask,input)
       mbf=t(as.matrix(temp$mbf))
       ci=t(as.matrix(temp$ci))
     }
