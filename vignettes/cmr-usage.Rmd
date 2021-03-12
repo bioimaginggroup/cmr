@@ -23,33 +23,33 @@ We use a simulated data set and add random white noise.
 
 ```{r simulate, cache=TRUE}
 data(cmrsim)
-for (i in 1:dim(data)[1])
-for (j in 1:dim(data)[2])
+for (i in 1:dim(cmrdata_sim)[1])
+for (j in 1:dim(cmrdata_sim)[2])
 for (k in 1:3)
-if (!is.na(data[i,j,k,1]))
-data[i,j,k,]=data[i,j,k,]+rnorm(30,0,sqrt(30))
+if (!is.na(cmrdata_sim[i,j,k,1]))
+cmrdata_sim[i,j,k,]=cmrdata_sim[i,j,k,]+rnorm(30,0,sqrt(30))
 ```
 
 Let's have a look on the data:
 ```{r showdata, cache=TRUE}
-imageMBF(data[,,,1])
-imageMBF(data[,,,10])
-imageMBF(data[,,,20])
-imageMBF(data[,,,30])
+imageMBF(cmrdata_sim[,,,1])
+imageMBF(cmrdata_sim[,,,10])
+imageMBF(cmrdata_sim[,,,20])
+imageMBF(cmrdata_sim[,,,30])
 ```
 
 ## Analysis
 
 ```{r localanalysis, cache=TRUE}
-print(system.time({local=cmr(data,aif,method="local",cores=4)}))
+print(system.time({local=cmr(cmrdata_sim,input_sim,method="local",cores=4)}))
 imageMBF(local$mbf,zlim=c(0,5))
 imageMBF(local$ci,zlim=c(0,.8))
 ```
 
 ```{r spatialanalysis, cache=TRUE}
-print(system.time({spatial=cmr(data,aif,method="spatial",cores=4)}))
+print(system.time({spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=4)}))
 pseudobullseye(spatial$mbf,lim=c(0,5))
 pseudobullseye(spatial$ci,lim=c(0,5))
-pseudobullseye(resp,lim=c(0,5))
+pseudobullseye(maxresp_sim,lim=c(0,5))
 ```
 

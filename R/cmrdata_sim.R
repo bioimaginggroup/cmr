@@ -5,6 +5,4 @@
 #' @usage data(cmrsim)
 #' @author Volker Schmid \email{volker.schmid@lmu.de}
 #' @keywords datasets cmr example
-'aif'
-'data'
-'resp'
+'cmrdata_sim'

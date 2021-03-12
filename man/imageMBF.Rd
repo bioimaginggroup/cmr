@@ -21,5 +21,5 @@ Plotting of (voxelwise) cardiac MBF
 }
 \examples{
 data(cmrsim)
-imageMBF(resp)
+imageMBF(maxresp_sim)
 }

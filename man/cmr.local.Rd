@@ -24,18 +24,20 @@ list of mbf (point estimation) and ci (credible interval)
 Spline analysis of cardiovascular magnetic resonance imaging
 }
 \examples{
+donotrun{
  library(cmR)
  data(cmrsim)
  local.mbf=array(NA,c(30,30,3))
  local.ci=array(NA,c(30,30,3))
  for (i in 1:3)
  {  mask=array(NA,c(30,30))
- mask[data[,,i,1]!=0]=1
- temp=cmr.local(data[,,i,],mask,aif)
+ mask[cmrdata_sim[,,i,1]!=0]=1
+ temp=cmr.local(cmrdata_sim[,,i,],mask,input_sim)
  local.mbf[,,i]=t(as.matrix(temp$mbf))
  local.ci[,,i]=t(as.matrix(temp$ci))
  }
 par(mfrow=c(2,1))
-imageMBF(resp,zlim=c(0,5))
+imageMBF(maxresp_sim,zlim=c(0,5))
 imageMBF(local.mbf,zlim=c(0,5))
+}
 }

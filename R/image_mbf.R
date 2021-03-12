@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' data(cmrsim)
-#' imageMBF(resp)
+#' imageMBF(maxresp_sim)
 imageMBF<-function(img,zlim=NULL,reverse=TRUE)
 {
 Z=dim(img)[3]
