@@ -1,8 +1,8 @@
 Package: cmR
 Type: Package
 Title: Analysis of cardiac magnetic resonance images
-Version: 0.2.7
-Date: 2020-12-28
+Version: 0.2.9
+Date: 2021-03-12
 Author: Volker Schmid
 Authors@R: c(person("Volker", "Schmid", role = c("aut", "cre"),
 		     email = "volker.schmid@lmu.de"))

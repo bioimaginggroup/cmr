@@ -13,7 +13,7 @@ cmr.local(data, mask, input, quantiles = c(0.25, 0.75), cores = 1)
 
 \item{input}{input function}
 
-\item{quantiles}{quantiles used for credible intervall, default: c(0.25, 0.75)}
+\item{quantiles}{quantiles used for credible interval, default: c(0.25, 0.75)}
 
 \item{cores}{number of cores to use in parallel computing}
 }
