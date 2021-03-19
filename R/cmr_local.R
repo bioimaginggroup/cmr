@@ -173,9 +173,6 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.loca
     b = (taueps.local*DC)[,1]
     beta.local=rmvnormcanon(1,b,L)
     
-    plot(D.sparse%*%beta.local,type="l")
-    points(Ct, cex=2)
-    
     a=1+T/2
     bb=1e-3+0.5*sum((D.sparse%*%beta.local-Ct)^2)
     taueps.local=stats::rgamma(1,a,bb)
@@ -195,7 +192,7 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.loca
     {
       tauq.l.s=cbind(tauq.l.s,tauq.local)
       taueps.l.s=c(taueps.l.s,taueps.local)
-      beta.l.s=cbind(beta.l.s,beta.local[,1])
+      beta.l.s=cbind(beta.l.s,beta.local[1])
     }
   }
   
