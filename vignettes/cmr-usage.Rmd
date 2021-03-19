@@ -47,9 +47,8 @@ imageMBF(local$ci,zlim=c(0,.8))
 ```
 
 ```{r spatialanalysis, cache=TRUE}
-print(system.time({spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=32)}))
-pseudobullseye(spatial$mbf,lim=c(0,5))
-pseudobullseye(spatial$ci,lim=c(0,5))
-pseudobullseye(maxresp_sim,lim=c(0,5))
+spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=32)
+imageMBF(spatial$mbf,zlim=c(0,5))
+imageMBF(spatial$ci,zlim=c(0,.8))
 ```
 
