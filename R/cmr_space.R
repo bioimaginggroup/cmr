@@ -41,9 +41,9 @@ zeit<-((1:T)-1)/60
 #knots<-seq(-6.5,44,length=25)/60
 #knots<-knots[-seq(13,25,by=2)]
 #knots<-knots[-seq(10,18,by=2)]
-knots=c(seq(-5,1,by=2),seq(3,13,by=1),seq(14,36,by=2))
-knots=seq(-2,33,length=24)
-knots<-knots[-seq(14,30,by=2)]
+# knots=c(seq(-5,1,by=2),seq(3,13,by=1),seq(14,36,by=2))
+# knots=seq(-2,33,length=24)
+# knots<-knots[-seq(14,30,by=2)]
 knots=seq(-1,T+1,length=T-2)
 knots=knots/60#-1/60
 k<-4
@@ -194,6 +194,12 @@ R.klein<-matrix(c(1,-1,-1,1),nrow=2)
 
 tauq.s<-taueps.s<-beta.s<-taur.s<-c()
 
+do.taueps<-function(i, D.sparse,beta,p,Ct,T)
+{
+  bb=1e-3+sum(0.5*(D.sparse%*%beta[(1:p)+(i-1)*p]-Ct[(1:T)+(i-1)*T])^2)
+  return(stats::rgamma(1,1+T/2,bb))
+}
+
 for (iter in 1:200)
 {
 
@@ -201,21 +207,10 @@ for (iter in 1:200)
 QR=Matrix::kronecker(Matrix::Diagonal(N),Q.sparse)+Matrix::kronecker(R.sparse,Matrix::Diagonal(p))
 
 L = QR + IDD
-L=Matrix::Cholesky(L)
-L=methods::as(L,"sparseMatrix")
 b = IDC
-w=Matrix::solve(Matrix::t(L),b)
-mu=Matrix::solve(L,w)
-z=stats::rnorm(p*N)
-v=Matrix::solve(L,z)
-beta=mu+v
+beta=rmvnormcanon(1,b,L)
 
-for (i in 1:N)
-{
-a=1+T/2
-bb=1e-3+sum(0.5*(D.sparse%*%beta[(1:p)+(i-1)*p]-Ct[(1:T)+(i-1)*T])^2)
-taueps[i]=stats::rgamma(1,a,bb)
-}
+taueps=unlist(parallel::mclapply(1:N, do.taueps,D.sparse,beta,p,Ct,T))
 
 IDD = Matrix::kronecker(Diagonal(N,taueps),DD)
 IDC = rep(taueps,each=p)*DC

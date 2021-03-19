@@ -38,12 +38,16 @@ T=dim(data)[3]
 # compute B
 
 zeit<-((1:T)-1)/60
-#knots<-seq(-6.5,44,length=25)/60
-#knots<-knots[-seq(13,25,by=2)]
-#knots<-knots[-seq(10,18,by=2)]
-knots=c(seq(-5,1,by=2),seq(3,13,by=1),seq(14,36,by=2))
-knots=seq(-2,33,length=24)
-knots<-knots[-seq(14,30,by=2)]
+# knots<-seq(-6.5,44,length=25)/60
+# knots<-knots[-seq(13,25,by=2)]
+# knots<-knots[-seq(10,18,by=2)]
+
+#Eventuell bessere Wahl?
+#knots=c(seq(-5,1,by=2),seq(3,13,by=1),seq(14,36,by=2))
+
+# knots=seq(-2,33,length=24)
+# knots<-knots[-seq(14,30,by=2)]
+# 
 knots<-seq(-1,T+1,length=T-2)
 knots=knots/60#-1/60
 k<-4
@@ -166,14 +170,11 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.loca
     # update beta
     
     L = Q.sparse + taueps.local*DD
-    b = taueps.local*DC
-    L=Matrix::Cholesky(L)
-    L=methods::as(L,"sparseMatrix")
-    w=Matrix::solve(Matrix::t(L),b)
-    mu=Matrix::solve(L,w)
-    z=stats::rnorm(p)
-    v=Matrix::solve(L,z)
-    beta.local=mu+v
+    b = (taueps.local*DC)[,1]
+    beta.local=rmvnormcanon(1,b,L)
+    
+    plot(D.sparse%*%beta.local,type="l")
+    points(Ct, cex=2)
     
     a=1+T/2
     bb=1e-3+0.5*sum((D.sparse%*%beta.local-Ct)^2)

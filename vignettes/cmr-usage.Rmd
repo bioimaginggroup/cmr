@@ -41,13 +41,13 @@ imageMBF(cmrdata_sim[,,,30])
 ## Analysis
 
 ```{r localanalysis, cache=TRUE}
-print(system.time({local=cmr(cmrdata_sim,input_sim,method="local",cores=4)}))
+print(system.time({local=cmr(cmrdata_sim,input_sim,method="local",cores=32)}))
 imageMBF(local$mbf,zlim=c(0,5))
 imageMBF(local$ci,zlim=c(0,.8))
 ```
 
 ```{r spatialanalysis, cache=TRUE}
-print(system.time({spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=4)}))
+print(system.time({spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=32)}))
 pseudobullseye(spatial$mbf,lim=c(0,5))
 pseudobullseye(spatial$ci,lim=c(0,5))
 pseudobullseye(maxresp_sim,lim=c(0,5))
