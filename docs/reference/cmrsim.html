@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Spatial spline analysis of cardiovascular magnetic resonance imaging — cmr.space • cmR</title>
+<title>Simulated data for CMR package — cmrsim • cmR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Spatial spline analysis of cardiovascular magnetic resonance imaging — cmr.space" />
-<meta property="og:description" content="Spatial spline analysis of cardiovascular magnetic resonance imaging" />
+<meta property="og:title" content="Simulated data for CMR package — cmrsim" />
+<meta property="og:description" content="Simulated data for CMR package" />
 
 
 
@@ -105,44 +105,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Spatial spline analysis of cardiovascular magnetic resonance imaging</h1>
+    <h1>Simulated data for CMR package</h1>
     
-    <div class="hidden name"><code>cmr.space.Rd</code></div>
+    <div class="hidden name"><code>cmrsim.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Spatial spline analysis of cardiovascular magnetic resonance imaging</p>
+    <p>Simulated data for CMR package</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cmr.space</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>mask</span>, <span class='va'>input</span>, quantiles <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cmrsim</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>3d array of CMR signal</p></td>
-    </tr>
-    <tr>
-      <th>mask</th>
-      <td><p>2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis</p></td>
-    </tr>
-    <tr>
-      <th>input</th>
-      <td><p>input function</p></td>
-    </tr>
-    <tr>
-      <th>quantiles</th>
-      <td><p>quantiles used for credible intervall, default: c(0.25, 0.75)</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>list of mbf (point estimation) and ci (credible interval)</p>
+    <p>An object of class <code>array</code> of dimension 30 x 30 x 3 x 30.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <p>Volker Schmid <a href='mailto:volker.schmid@lmu.de'>volker.schmid@lmu.de</a></p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
