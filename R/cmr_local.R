@@ -138,7 +138,7 @@ tauq.local<-rep(1,p-2)
 Q.sparse=Matrix::sparseMatrix(Q.x,Q.y,x=as.vector(tauq2Q%*%tauq.local),dims=c(p,p))
 taueps.local=1/10
 
-temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores)
+system.time(temp<-parallel::mclapply(1:N,cmr.voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.local, DD, T, p, B, Q.klein, Q.x, Q.y, tauq2Q, mc.cores=cores))
   
 NRI<-300
 response=array(NA,c(T,N,NRI))
@@ -192,7 +192,7 @@ cmr.voxel<-function(voxel,data,coord,Q.sparse, D.sparse, taueps.local, tauq.loca
     {
       tauq.l.s=cbind(tauq.l.s,tauq.local)
       taueps.l.s=c(taueps.l.s,taueps.local)
-      beta.l.s=cbind(beta.l.s,beta.local[1])
+      beta.l.s=cbind(beta.l.s,beta.local)
     }
   }
   
