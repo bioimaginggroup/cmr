@@ -12,22 +12,16 @@
 #' @importFrom stats rnorm rgamma median quantile
 #' 
 #' @examples
-#' donotrun{
 #'  library(cmR)
 #'  data(cmrsim)
-#'  local.mbf=array(NA,c(30,30,3))
-#'  local.ci=array(NA,c(30,30,3))
-#'  for (i in 1:3)
-#'  {  mask=array(NA,c(30,30))
-#'  mask[cmrdata_sim[,,i,1]!=0]=1
-#'  temp=cmr.local(cmrdata_sim[,,i,],mask,input_sim)
+#'  mask=array(NA,c(30,30))
+#'  mask[cmrdata_sim[,,1,1]!=0]=1
+#'  temp=cmr.local(cmrdata_sim[,,1,],mask,input_sim)
 #'  local.mbf[,,i]=t(as.matrix(temp$mbf))
 #'  local.ci[,,i]=t(as.matrix(temp$ci))
-#'  }
 #' par(mfrow=c(2,1))
 #' imageMBF(maxresp_sim,zlim=c(0,5))
 #' imageMBF(local.mbf,zlim=c(0,5))
-#' }
 cmr.local<-function(data,mask,input,quantiles=c(.25,.75), cores=1)
 {
 XX<-dim(data)[1]
