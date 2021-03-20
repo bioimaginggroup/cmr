@@ -28,10 +28,11 @@ Spline analysis of cardiovascular magnetic resonance imaging
  data(cmrsim)
  mask=array(NA,c(30,30))
  mask[cmrdata_sim[,,1,1]!=0]=1
- temp=cmr.local(cmrdata_sim[,,1,],mask,input_sim)
- local.mbf[,,i]=t(as.matrix(temp$mbf))
- local.ci[,,i]=t(as.matrix(temp$ci))
+ temp=cmr.local(cmrdata_sim[,,1,], mask, input_sim, cores=8)
+ local.mbf=t(as.matrix(temp$mbf))
+ local.ci=t(as.matrix(temp$ci))
 par(mfrow=c(2,1))
-imageMBF(maxresp_sim,zlim=c(0,5))
-imageMBF(local.mbf,zlim=c(0,5))
+imageMBF(maxresp_sim[,,1], zlim=c(0,5))
+imageMBF(local.mbf, zlim=c(0,5))
+imageMBF(local.ci, zlim=c(0,0.8))
 }

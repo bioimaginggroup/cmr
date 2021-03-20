@@ -10,23 +10,17 @@
 #' @import splines Matrix 
 #' @importFrom stats rnorm rgamma median quantile
 #' @examples 
-#' donotrun{
-#' library(cmR)
-#' data(cmrsim)
-#' space.mbf=array(NA,c(30,30,3))
-#' space.ci=array(NA,c(30,30,3))
-#' for (i in 1:3)
-#' {
-#' mask=array(NA,c(30,30))
-#' mask[cmrdata_sim[,,i,1]!=0]=1
-#' temp=cmr.space(cmrdata_sim[,,i,],mask,input_sim)
-#' space.mbf[,,i]=t(as.matrix(temp$mbf))
-#' space.ci[,,i]=t(as.matrix(temp$ci))
-#' }
+#'  library(cmR)
+#'  data(cmrsim)
+#'  mask=array(NA,c(30,30))
+#'  mask[cmrdata_sim[,,1,1]!=0]=1
+#'  temp=cmr.space(cmrdata_sim[,,1,], mask, input_sim, cores=8)
+#'  local.mbf=t(as.matrix(temp$mbf))
+#'  local.ci=t(as.matrix(temp$ci))
 #' par(mfrow=c(2,1))
-#' imageMBF(maxresp_sim,zlim=c(0,5))
-#' imageMBF(space.mbf,zlim=c(0,5))
-#' }
+#' imageMBF(maxresp_sim[,,1], zlim=c(0,5))
+#' imageMBF(local.mbf, zlim=c(0,5))
+#' imageMBF(local.ci, zlim=c(0,0.8))
 
 cmr.space<-function(data,mask,input,quantiles=c(.25,.75))
 {
