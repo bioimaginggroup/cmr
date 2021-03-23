@@ -6,6 +6,7 @@
 #'
 #' @return matrix with n columns, vector if n=1
 #'
+#' @export
 #' @examples
 #' P<-matrix(c(1,.5,.5,1),ncol=2)
 #' b=c(2,0)

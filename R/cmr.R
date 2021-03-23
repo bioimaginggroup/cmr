@@ -10,13 +10,14 @@
 #' @importFrom parallel mclapply
 #' @export
 
-cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), cores=getOption("mc.cores", 1))
+cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), cores=parallel::detectCores())
 {
   if (length(dim(data))==4)
   {
     mbf <- ci <- array(NA,dim(data)[1:3])
     I <- 1:dim(mbf)[3]
-    if (cores>1)temp<-parallel::mclapply(I,do.cmr,data,input,mask,method,cores=floor(cores/dim(mbf)[3]),mc.cores=cores/dim(mbf)[3], mc.allow.recursive=TRUE)
+    if (cores>1)temp<-parallel::mclapply(I,do.cmr,data,input,mask,method,
+                                         cores=max(1,floor(cores/dim(mbf)[3])),mc.cores=dim(mbf)[3], mc.allow.recursive=TRUE)
     if (cores==1)temp<-lapply(I,do.cmr,data,input,mask,method,cores=1)
     
     for (i in I)

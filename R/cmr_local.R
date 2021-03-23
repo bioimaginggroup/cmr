@@ -12,17 +12,23 @@
 #' @importFrom stats rnorm rgamma median quantile
 #' 
 #' @examples
+#' \dontrun{
 #'  library(cmR)
 #'  data(cmrsim)
-#'  mask=array(NA,c(30,30))
-#'  mask[cmrdata_sim[,,1,1]!=0]=1
-#'  temp=cmr.local(cmrdata_sim[,,1,], mask, input_sim, cores=8)
-#'  local.mbf=t(as.matrix(temp$mbf))
-#'  local.ci=t(as.matrix(temp$ci))
-#' par(mfrow=c(2,1))
-#' imageMBF(maxresp_sim[,,1], zlim=c(0,5))
-#' imageMBF(local.mbf, zlim=c(0,5))
-#' imageMBF(local.ci, zlim=c(0,0.8))
+#'  local.mbf=local.ci=array(NA,c(30,30,3))
+#'  for (i in 1:3){
+#'   mask=array(NA,c(30,30))
+#'   mask[cmrdata_sim[,,i,1]!=0]=1
+#'   temp=cmr.local(cmrdata_sim[,,i,], mask, input_sim, cores=parallel::detectCores())
+#'   local.mbf[,,i]=t(as.matrix(temp$mbf))
+#'   local.ci[,,i]=t(as.matrix(temp$ci))
+#'  }
+#'  par(mfrow=c(2,1))
+#'  imageMBF(maxresp_sim, zlim=c(0,5))
+#'  imageMBF(local.mbf, zlim=c(0,5))
+#'  imageMBF(local.ci, zlim=c(0,0.8))
+#' }
+#' 
 cmr.local<-function(data,mask,input,quantiles=c(.25,.75), cores=1)
 {
 XX<-dim(data)[1]
@@ -150,6 +156,9 @@ resp.q4=resp.q4[2,]-resp.q4[1,]
 
 resp.i<-Matrix::sparseMatrix(coord[1,],coord[2,],x=apply(resp.max,1,stats::median),dims=c(XX,YY))
 resp.i4<-Matrix::sparseMatrix(coord[1,],coord[2,],x=resp.q4,dims=c(XX,YY))
+
+resp.i[resp.i==0]<-NA
+resp.i4[resp.i4==0]<-NA
 
 return(list("mbf"=resp.i,"ci"=resp.i4))
 }

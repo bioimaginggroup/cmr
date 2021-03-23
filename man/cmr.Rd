@@ -10,7 +10,7 @@ cmr(
   mask = NULL,
   method = "spatial",
   quantiles = c(0.25, 0.75),
-  cores = getOption("mc.cores", 1)
+  cores = parallel::detectCores()
 )
 }
 \arguments{

@@ -5,3 +5,4 @@ no_cran
 TODO.md
 _pkgdown.yml
 docs
+vignettes/largevignette
