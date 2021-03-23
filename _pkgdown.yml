@@ -27,13 +27,20 @@ navbar:
 articles:
 - title: "Vignettes"
   contents:
-  - none
+  - largevignette/cmr-usage
 reference:
 - title: cmR analysis
   contents:
-  - starts_with("cmr")
+  - cmr
+  - starts_with("cmr.")
+  - rmvnormcanon
 - title: Plotting
   contents:
-  - bullseye
   - pseudobullseye
   - imageMBF
+  - bullseye
+- title: Simulated data
+  contents:
+  - maxresp_sim
+  - cmrdata_sim
+  - input_sim
