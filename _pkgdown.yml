@@ -4,8 +4,6 @@ home:
   links:
   - text: IEEE TMI article
     href: https://ieeexplore.ieee.org/document/5706368
-  - text: cmR on github
-    href: https://github.com/bioimaginggroup/cmR
   - text: Bayesian Bioimaging and Spatial Statistics group
     href: https://www.bioimg.statistik.uni-muenchen.de/index.html
 
@@ -18,6 +16,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Usage"
+      href: articles/largevignette/cmr-usage.html
     - text: "Reference"
       href: reference/index.html
   right:
@@ -32,7 +32,8 @@ reference:
 - title: cmR analysis
   contents:
   - cmr
-  - starts_with("cmr.")
+  - cmr.space
+  - cmr.local
   - rmvnormcanon
 - title: Plotting
   contents:
