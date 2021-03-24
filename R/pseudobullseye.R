@@ -10,7 +10,12 @@
 #'
 #' @return plots
 #' @export
-pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=FALSE, cex=2){
+#' @importFrom fields tim.colors image.plot
+#' @examples
+#' data(cmrsim)
+#' pseudobullseye(maxresp_sim)
+#' 
+pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=TRUE, cex=1.5){
   mbf=x
   zlim=lim
   if (center)
@@ -34,6 +39,7 @@ pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, re
   }
   par(mar=c(0,0,0,0))
   par(pty="s",bty="n")
+  par(plt=c(0,1,.1,1))
   co=tim.colors(64)
   if(reverse)co=rev(tim.colors(64))
   image(mbf[,,3],zlim=zlim,col=co,axes=FALSE)
@@ -43,12 +49,14 @@ pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, re
     text(0.15,0.83,"LAD")
     text(0.15,0.13,"RCA")
   }
-  #par(plt=c(.16,.84,.13,.81),new=TRUE)
-  par(plt=c(.15,.85,.15,.85),new=TRUE)
+  fields::image.plot(mbf,zlim=zlim,legend.only=TRUE,legend.width=1.8,add=FALSE, horizontal = TRUE)
+  par(plt=c(.16,.84,.244,.856),new=TRUE)
   par(pty="s",bty="n")
   image(mbf[,,2],zlim=zlim,axes=FALSE,col=co)
   #par(plt=c(.30,.74,.24,.68),new=TRUE)
-  par(plt=c(.3,.7,.3,.7),new=TRUE)
+  par(plt=c(.28,.72,.352,.748),new=TRUE)
   par(pty="s",bty="n")
   image(mbf[,,1],zlim=zlim,axes=FALSE,col=co)
+
+  
 }

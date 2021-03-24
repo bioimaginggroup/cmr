@@ -10,8 +10,8 @@ pseudobullseye(
   legend = FALSE,
   text = TRUE,
   reverse = FALSE,
-  center = FALSE,
-  cex = 2
+  center = TRUE,
+  cex = 1.5
 )
 }
 \arguments{
@@ -34,4 +34,9 @@ plots
 }
 \description{
 Pseudo bullseye plot
+}
+\examples{
+data(cmrsim)
+pseudobullseye(maxresp_sim)
+
 }
