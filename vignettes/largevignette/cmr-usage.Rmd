@@ -31,7 +31,7 @@ cmrdata_sim[i,j,k,]=cmrdata_sim[i,j,k,]+rnorm(30,0,sqrt(30))
 ```
 
 Let's have a look on the data:
-```{r showdata, cache=TRUE}
+```{r showdata}
 imageMBF(cmrdata_sim[,,,1])
 title(main="Time t=1")
 imageMBF(cmrdata_sim[,,,10])
@@ -50,13 +50,14 @@ Here we start with the local analysis. The local analysis can be easily parallel
 
 ```{r localanalysis, cache=TRUE}
 local=cmr(cmrdata_sim,input_sim,method="local",cores=parallel::detectCores())
+```
+```{r localanalysis-plot}
 imageMBF(local$mbf,zlim=c(0,5))
-imageMBF(local$ci,zlim=c(0,.8))
 ```
 
 The model uses a Bayesian framework and credible intervals are also produced. We can have a look at the length of the credible intervals voxelwise: 
 
-```{r localanalysisci, cache=TRUE}
+```{r localanalysis-ci}
 imageMBF(local$ci,zlim=c(0,.8))
 ```
 
@@ -64,13 +65,15 @@ Now let's have a look at the spatial analysis. Here, parallelisation is not as e
 
 ```{r spatialanalysis, cache=TRUE}
 spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=parallel::detectCores())
+```
+```{r spatialanalysis-plot}
 imageMBF(spatial$mbf,zlim=c(0,5))
 imageMBF(spatial$ci,zlim=c(0,.8))
 ```
 
 Finally, we compare the true maximum response used for the simulation and the results from the local analysis and the spatial analysis. Here, we use the "pseudo bullseye" representation.
 
-```{r comparison, cache=TRUE}
+```{r pseudobullseye}
 par(mfrow=c(1,3))
 pseudobullseye(maxresp_sim); title(main="true")
 pseudobullseye(local$mbf); title(main="local")

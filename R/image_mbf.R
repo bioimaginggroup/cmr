@@ -6,8 +6,8 @@
 #'
 #' @return plots
 #' @export
-#' @importFrom graphics par plot polygon
-#'
+#' @import fields
+#' 
 #' @examples
 #' data(cmrsim)
 #' imageMBF(maxresp_sim)
@@ -35,10 +35,8 @@ xrange=range(which(apply(img[,,i],1,sum.na)!=0))
 fullimg=rbind(fullimg,img[xrange[1]:xrange[2],yrange[1]:yrange[2],i])
 }
 par(pin=5*c(dim(fullimg)/max(dim(fullimg))))
-par(mai=rep(.1,4))
 farbe=fields::tim.colors(64)
 if(reverse)farbe=rev(farbe)
-#add  space for legend
 fields::image.plot(fullimg,zlim=zlim,legend.width=1.8, axes=FALSE)
 }
 
