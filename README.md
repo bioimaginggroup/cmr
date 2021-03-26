@@ -10,4 +10,4 @@ You can install the released version of cmR from [CRAN](https://CRAN.R-project.o
 install.packages("cmR")
 ```
 
-[![Travis build status](https://travis-ci.org/bioimaginggroup/cmr.svg?branch=master)](https://travis-ci.org/bioimaginggroup/cmr)
+[![Travis build status](https://travis-ci.com/bioimaginggroup/cmr.svg?branch=master)](https://travis-ci.com/bioimaginggroup/cmr)
