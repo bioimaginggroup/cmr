@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cmR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
@@ -123,8 +123,9 @@
   legend <span class='op'>=</span> <span class='cn'>FALSE</span>,
   text <span class='op'>=</span> <span class='cn'>TRUE</span>,
   reverse <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  cex <span class='op'>=</span> <span class='fl'>2</span>
+  center <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  cex <span class='op'>=</span> <span class='fl'>1</span>,
+  legend.width <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -158,12 +159,21 @@
       <th>cex</th>
       <td><p>cex for text legend</p></td>
     </tr>
+    <tr>
+      <th>legend.width</th>
+      <td><p>Width in characters of the legend strip.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>plots</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cmrsim</span><span class='op'>)</span>
+<span class='fu'>pseudobullseye</span><span class='op'>(</span><span class='va'>maxresp_sim</span><span class='op'>)</span>
+</div><div class='img'><img src='pseudobullseye-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
