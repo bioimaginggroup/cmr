@@ -6,16 +6,18 @@
 #' @param legend boolean, add legend?
 #' @param text boolean, should text legend be added?
 #' @param cex cex for text legend
+#' @param legend.width Width in characters of the legend strip.
 #' @param center boolean, should input x be centered before plotting
 #'
 #' @return plots
 #' @export
+#' @importFrom graphics par
 #' @importFrom fields tim.colors image.plot
 #' @examples
 #' data(cmrsim)
 #' pseudobullseye(maxresp_sim)
 #' 
-pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=TRUE, cex=1.5){
+pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=TRUE, cex=1, legend.width=1){
   mbf=x
   zlim=lim
   if (center)
@@ -37,9 +39,8 @@ pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, re
     }
     mbf<-mbf.neu
   }
-  par(mar=c(0,0,0,0))
   par(pty="s",bty="n")
-  par(plt=c(0,1,.1,1))
+  par(plt=c(.2,.9,.15,.85))
   co=tim.colors(64)
   if(reverse)co=rev(tim.colors(64))
   image(mbf[,,3],zlim=zlim,col=co,axes=FALSE)
@@ -49,14 +50,12 @@ pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, re
     text(0.15,0.83,"LAD")
     text(0.15,0.13,"RCA")
   }
-  fields::image.plot(mbf,zlim=zlim,legend.only=TRUE,legend.width=1.8,add=FALSE, horizontal = TRUE)
-  par(plt=c(.16,.84,.244,.856),new=TRUE)
+  fields::image.plot(mbf,zlim=zlim,legend.only=TRUE,legend.width=legend.width,add=FALSE, horizontal = TRUE)
+  par(plt=c(.31,.79,.26,.74),new=TRUE)
   par(pty="s",bty="n")
   image(mbf[,,2],zlim=zlim,axes=FALSE,col=co)
   #par(plt=c(.30,.74,.24,.68),new=TRUE)
-  par(plt=c(.28,.72,.352,.748),new=TRUE)
+  par(plt=c(.38,.72,.33,.67),new=TRUE)
   par(pty="s",bty="n")
   image(mbf[,,1],zlim=zlim,axes=FALSE,col=co)
-
-  
 }

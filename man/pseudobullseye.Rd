@@ -11,7 +11,8 @@ pseudobullseye(
   text = TRUE,
   reverse = FALSE,
   center = TRUE,
-  cex = 1.5
+  cex = 1,
+  legend.width = 1
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ pseudobullseye(
 \item{center}{boolean, should input x be centered before plotting}
 
 \item{cex}{cex for text legend}
+
+\item{legend.width}{Width in characters of the legend strip.}
 }
 \value{
 plots

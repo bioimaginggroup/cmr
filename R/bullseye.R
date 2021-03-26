@@ -10,7 +10,7 @@
 #' @return plot
 #' @export
 #' @import fields 
-#' @importFrom graphics polygon
+#' @importFrom graphics polygon par
 #' @examples
 #'   bullseye(1:16)
 bullseye<-function(x, lim=NULL,reverse=TRUE,legend=TRUE,text=TRUE,cex=1)

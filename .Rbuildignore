@@ -6,3 +6,5 @@ TODO.md
 _pkgdown.yml
 docs
 vignettes/largevignette
+^CRAN-RELEASE$
+^cran-comments\.md$
