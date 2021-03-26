@@ -6,6 +6,8 @@ home:
     href: https://ieeexplore.ieee.org/document/5706368
   - text: Bayesian Bioimaging and Spatial Statistics group
     href: https://www.bioimg.statistik.uni-muenchen.de/index.html
+  - text: cmR on cran
+    href: https://cran.r-project.org/web/packages/cmr
 
 templates:
   params:
@@ -24,10 +26,6 @@ navbar:
     - icon: fa-github fa-lg
       href: https://github.com/bioimaginggroup/cmR
 
-articles:
-- title: "Vignettes"
-  contents:
-  - largevignette/cmr-usage
 reference:
 - title: cmR analysis
   contents:
