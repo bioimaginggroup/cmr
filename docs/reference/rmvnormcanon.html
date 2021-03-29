@@ -150,12 +150,12 @@
 <span class='va'>x</span><span class='op'>&lt;-</span><span class='fu'>rmvnormcanon</span><span class='op'>(</span><span class='fl'>1000</span>,<span class='va'>b</span>,<span class='va'>P</span><span class='op'>)</span>
 <span class='va'>mu.hat</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>x</span>,<span class='fl'>1</span>,<span class='va'>mean</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>mu.hat</span><span class='op'>-</span><span class='va'>mu</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             [,1]        [,2]
-#&gt; [1,] 0.007240035 -0.03916606</div><div class='input'><span class='va'>Sigma.hat</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;           [,1]        [,2]
+#&gt; [1,] 0.0485599 -0.01178992</div><div class='input'><span class='va'>Sigma.hat</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>Sigma.hat</span><span class='op'>-</span><span class='va'>Sigma</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]         [,2]
-#&gt; [1,]  0.1458503 -0.042802698
-#&gt; [2,] -0.0428027  0.009073944</div><div class='input'>
+</div><div class='output co'>#&gt;             [,1]        [,2]
+#&gt; [1,]  0.00689050 -0.03850125
+#&gt; [2,] -0.03850125  0.06278155</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
