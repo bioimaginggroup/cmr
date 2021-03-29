@@ -1,14 +1,13 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 language: r
-jobs:
-  include:
-    - os: linux
-    - os: osx
-      osx_image: xcode10.1
-r:
-  - release
-  - devel
-  - oldrel
+warnings_are_errors: true
 sudo: false
 cache: packages
-warnings_are_errors: true
+
+r_build_args: --compact-vignettes=gs+qpdf --resave-data --as-cran
+r_check_args: --as-cran
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
