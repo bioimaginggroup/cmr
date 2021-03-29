@@ -10,7 +10,8 @@
 #' @import splines Matrix 
 #' @importFrom stats rnorm rgamma median quantile
 #' @examples 
-#' \dontrun{
+#' \donttest{
+#' oldpar <- par(no.readonly = TRUE)
 #'  library(cmR)
 #'  data(cmrsim)
 #'  mask=array(NA,c(30,30))
@@ -18,7 +19,7 @@
 #'  for (i in 1:3){
 #'   mask=array(NA,c(30,30))
 #'   mask[cmrdata_sim[,,i,1]!=0]=1
-#'   temp=cmr.space(cmrdata_sim[,,i,], mask, input_sim, cores=parallel::detectCores())
+#'   temp=cmr.space(cmrdata_sim[,,i,], mask, input_sim, cores=2)
 #'   space.mbf[,,i]=t(as.matrix(temp$mbf))
 #'   space.ci[,,i]=t(as.matrix(temp$ci))
 #'   }
@@ -26,6 +27,7 @@
 #'  imageMBF(maxresp_sim, zlim=c(0,5))
 #'  imageMBF(space.mbf, zlim=c(0,5))
 #'  imageMBF(space.ci, zlim=c(0,0.8))
+#'  par(oldpar)
 #' }
 #' 
 cmr.space<-function(data,mask,input,quantiles=c(.25,.75))
