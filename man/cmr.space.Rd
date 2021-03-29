@@ -9,11 +9,11 @@ cmr.space(data, mask, input, quantiles = c(0.25, 0.75))
 \arguments{
 \item{data}{3d array of CMR signal}
 
-\item{mask}{2d array of mask. Voxel with 0 or FALSE will be ommited from anaysis}
+\item{mask}{2d array of mask. Voxel with 0 or FALSE will be omitted from analysis}
 
 \item{input}{input function}
 
-\item{quantiles}{quantiles used for credible intervall, default: c(0.25, 0.75)}
+\item{quantiles}{quantiles used for credible interval, default: c(0.25, 0.75)}
 }
 \value{
 list of mbf (point estimation) and ci (credible interval)
@@ -22,7 +22,8 @@ list of mbf (point estimation) and ci (credible interval)
 Spatial spline analysis of cardiovascular magnetic resonance imaging
 }
 \examples{
-\dontrun{
+\donttest{
+oldpar <- par(no.readonly = TRUE)
  library(cmR)
  data(cmrsim)
  mask=array(NA,c(30,30))
@@ -30,7 +31,7 @@ Spatial spline analysis of cardiovascular magnetic resonance imaging
  for (i in 1:3){
   mask=array(NA,c(30,30))
   mask[cmrdata_sim[,,i,1]!=0]=1
-  temp=cmr.space(cmrdata_sim[,,i,], mask, input_sim, cores=parallel::detectCores())
+  temp=cmr.space(cmrdata_sim[,,i,], mask, input_sim, cores=2)
   space.mbf[,,i]=t(as.matrix(temp$mbf))
   space.ci[,,i]=t(as.matrix(temp$ci))
   }
@@ -38,6 +39,7 @@ Spatial spline analysis of cardiovascular magnetic resonance imaging
  imageMBF(maxresp_sim, zlim=c(0,5))
  imageMBF(space.mbf, zlim=c(0,5))
  imageMBF(space.ci, zlim=c(0,0.8))
+ par(oldpar)
 }
 
 }

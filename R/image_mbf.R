@@ -34,7 +34,6 @@ fullimg=rbind(fullimg,rep(NA,diff(yrange)+1))
 xrange=range(which(apply(img[,,i],1,sum.na)!=0))
 fullimg=rbind(fullimg,img[xrange[1]:xrange[2],yrange[1]:yrange[2],i])
 }
-#par(pin=5*c(dim(fullimg)/max(dim(fullimg))))
 farbe=fields::tim.colors(64)
 if(reverse)farbe=rev(farbe)
 fields::image.plot(fullimg,zlim=zlim,legend.width=1.8, axes=FALSE)

@@ -18,6 +18,8 @@
 #' pseudobullseye(maxresp_sim)
 #' 
 pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=TRUE, cex=1, legend.width=1){
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
   mbf=x
   zlim=lim
   if (center)

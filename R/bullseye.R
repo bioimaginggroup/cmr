@@ -10,11 +10,14 @@
 #' @return plot
 #' @export
 #' @import fields 
-#' @importFrom graphics polygon par
+#' @importFrom graphics polygon par plot
 #' @examples
 #'   bullseye(1:16)
 bullseye<-function(x, lim=NULL,reverse=TRUE,legend=TRUE,text=TRUE,cex=1)
 {
+oldpar <- par(no.readonly = TRUE)
+on.exit(par(oldpar))
+
 if (length(x)!=16)stop("x has to be of length 16")
 werte=x
 zlim=lim

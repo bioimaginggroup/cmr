@@ -2,9 +2,9 @@
 #'
 #' @param data 3D or 4D array of CMR signal 
 #' @param input input function
-#' @param mask 2D or 3D array of mask. Voxel with 0 or FALSE will be ommited from anaysis. Default NULL: use NA values in data as mask
+#' @param mask 2d array of mask. Voxel with 0 or FALSE will be omitted from analysis. Default NULL: use NA values in data as mask
 #' @param method "spatial" or "local"
-#' @param quantiles quantiles used for credible intervall, default: c(0.25, 0.75)
+#' @param quantiles quantiles used for credible interval, default: c(0.25, 0.75)
 #' @param cores number of cores for parallel computation. Spatial model only computes slices parallel, local can be parallelized on voxel level
 #' @return list of mbf (point estimation) and ci (credible interval)
 #' @importFrom parallel mclapply
@@ -12,6 +12,7 @@
 
 cmr<-function(data, input, mask=NULL, method="spatial", quantiles=c(.25,.75), cores=parallel::detectCores())
 {
+  if(.Platform$OS.type == "windows") { cores=1 }
   if (length(dim(data))==4)
   {
     mbf <- ci <- array(NA,dim(data)[1:3])

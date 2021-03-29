@@ -18,11 +18,11 @@ cmr(
 
 \item{input}{input function}
 
-\item{mask}{2D or 3D array of mask. Voxel with 0 or FALSE will be ommited from anaysis. Default NULL: use NA values in data as mask}
+\item{mask}{2d array of mask. Voxel with 0 or FALSE will be omitted from analysis. Default NULL: use NA values in data as mask}
 
 \item{method}{"spatial" or "local"}
 
-\item{quantiles}{quantiles used for credible intervall, default: c(0.25, 0.75)}
+\item{quantiles}{quantiles used for credible interval, default: c(0.25, 0.75)}
 
 \item{cores}{number of cores for parallel computation. Spatial model only computes slices parallel, local can be parallelized on voxel level}
 }
