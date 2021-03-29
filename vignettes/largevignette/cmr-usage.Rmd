@@ -49,7 +49,7 @@ The function cmr() does the analysis and provides two methods: "local", which is
 Here we start with the local analysis. The local analysis can be easily parallelised, each computer core can compute one voxel. Note: parallel computing cannot be used on Windows due to restrictions in the parallel package. 
 
 ```{r localanalysis, cache=TRUE}
-local=cmr(cmrdata_sim,input_sim,method="local",cores=parallel::detectCores())
+local=cmr(cmrdata_sim,input_sim,method="local",cores=2)
 ```
 ```{r localanalysis-plot}
 imageMBF(local$mbf,zlim=c(0,5))
@@ -64,7 +64,7 @@ imageMBF(local$ci,zlim=c(0,.8))
 Now let's have a look at the spatial analysis. Here, parallelisation is not as easy as above, but is also possible to some extent.
 
 ```{r spatialanalysis, cache=TRUE}
-spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=parallel::detectCores())
+spatial=cmr(cmrdata_sim,input_sim,method="spatial",cores=2)
 ```
 ```{r spatialanalysis-plot}
 imageMBF(spatial$mbf,zlim=c(0,5))
