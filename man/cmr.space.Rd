@@ -31,7 +31,7 @@ oldpar <- par(no.readonly = TRUE)
  for (i in 1:3){
   mask=array(NA,c(30,30))
   mask[cmrdata_sim[,,i,1]!=0]=1
-  temp=cmr.space(cmrdata_sim[,,i,], mask, input_sim, cores=2)
+  temp=cmr.space(cmrdata_sim[,,i,], mask, input_sim)
   space.mbf[,,i]=t(as.matrix(temp$mbf))
   space.ci[,,i]=t(as.matrix(temp$ci))
   }
