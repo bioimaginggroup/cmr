@@ -19,6 +19,9 @@
 #' 
 pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, reverse=FALSE, center=TRUE, cex=1, legend.width=1){
   oldpar <- par(no.readonly = TRUE)
+  oldpar<-oldpar[which(names(oldpar)!="fig"&names(oldpar)!="fin"&
+                         names(oldpar)!="mfcol"&names(oldpar)!="mfrow"&names(oldpar)!="mfg"
+                       &names(oldpar)!="oma"&names(oldpar)!="omi"&names(oldpar)!="omd")]
   on.exit(par(oldpar))
   mbf=x
   zlim=lim
@@ -43,8 +46,8 @@ pseudobullseye<-function(x, lim=range(x,na.rm=TRUE), legend=FALSE, text=TRUE, re
   }
   par(pty="s",bty="n")
   par(plt=c(.2,.9,.15,.85))
-  co=tim.colors(64)
-  if(reverse)co=rev(tim.colors(64))
+  co=fields::tim.colors(64)
+  if(reverse)co=rev(fields::tim.colors(64))
   image(mbf[,,3],zlim=zlim,col=co,axes=FALSE)
   if(text){
     par(cex=cex)
