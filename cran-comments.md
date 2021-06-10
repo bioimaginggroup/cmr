@@ -5,4 +5,4 @@
 
 ## Changes
 
-Bugfix release. Solved additional issues on CRAN Package Check (https://www.stats.ox.ac.uk/pub/bdr/donttest/cmR.out).
+Bugfix release. Solved additional issues on CRAN Package Check (https://www.stats.ox.ac.uk/pub/bdr/donttest/cmR.out). Preparations for next Matrix package version.
