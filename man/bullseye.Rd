@@ -7,7 +7,7 @@
 bullseye(x, lim = NULL, reverse = TRUE, legend = TRUE, text = TRUE, cex = 1)
 }
 \arguments{
-\item{x}{vector of length 16}
+\item{x}{vector of length 16 or 17}
 
 \item{lim}{limits of x values}
 

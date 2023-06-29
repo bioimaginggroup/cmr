@@ -1,17 +1,17 @@
 Package: cmR
 Type: Package
 Title: Analysis of Cardiac Magnetic Resonance Images
-Version: 1.0.3
-Date: 2021-06-09
+Version: 1.1
+Date: 2023-06-28
 Author: Volker Schmid [aut, cre]
 Authors@R: c(person("Volker", "Schmid", role = c("aut", "cre"),
 		     email = "volker.schmid@lmu.de"))
 Maintainer: Volker Schmid <volker.schmid@lmu.de>
 Depends: R (>= 3.5.0)
-Imports: Matrix, splines, fields, graphics, parallel
+Imports: Matrix, splines, fields, graphics, parallel, plotrix
 Description: Computes maximum response from Cardiac Magnetic Resonance Images using spatial and voxel wise spline based Bayesian model. This is an implementation of the methods described in Schmid (2011) <doi:10.1109/TMI.2011.2109733> "Voxel-Based Adaptive Spatio-Temporal Modelling of Perfusion Cardiovascular MRI". IEEE TMI 30(7) p. 1305 - 1313.
 License: GPL-3
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 LazyData: true
 URL: https://bioimaginggroup.github.io/cmr/
