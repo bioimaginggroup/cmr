@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cmR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
       </span>
     </div>
 
@@ -150,12 +150,12 @@
 <span class='va'>x</span><span class='op'>&lt;-</span><span class='fu'>rmvnormcanon</span><span class='op'>(</span><span class='fl'>1000</span>,<span class='va'>b</span>,<span class='va'>P</span><span class='op'>)</span>
 <span class='va'>mu.hat</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>x</span>,<span class='fl'>1</span>,<span class='va'>mean</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>mu.hat</span><span class='op'>-</span><span class='va'>mu</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             [,1]       [,2]
-#&gt; [1,] -0.01863761 0.05150071</div><div class='input'><span class='va'>Sigma.hat</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;              [,1]       [,2]
+#&gt; [1,] -0.009728422 0.03118009</div><div class='input'><span class='va'>Sigma.hat</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>Sigma.hat</span><span class='op'>-</span><span class='va'>Sigma</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]        [,2]
-#&gt; [1,] 0.01469462  0.04064049
-#&gt; [2,] 0.04064049 -0.06546102</div><div class='input'>
+</div><div class='output co'>#&gt;             [,1]        [,2]
+#&gt; [1,] 0.023798004 0.002038942
+#&gt; [2,] 0.002038942 0.035384436</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

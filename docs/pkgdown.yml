@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 pandoc: 3.1.4
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   cmr-usage: largevignette/cmr-usage.html
 last_built: 2023-06-29T10:55Z
+=======
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  largevignette/cmr-usage: cmr-usage.html
+last_built: 2021-06-10T07:29Z
+>>>>>>> 685a03038bef5fc03ab20a790e5299e8767a0123
 
