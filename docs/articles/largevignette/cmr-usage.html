@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">cmR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -49,8 +51,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bioimaginggroup/cmR">
-    <span class="fas fa-github fa-lg"></span>
+  <a href="https://github.com/bioimaginggroup/cmR" class="external-link">
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -64,79 +66,93 @@
 
       
 
-      </header><script src="cmr-usage_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>CMR usage on example data set</h1>
-                        <h4 class="author">Volker J Schmid</h4>
+                        <h4 data-toc-skip class="author">Volker J
+Schmid</h4>
             
-            <h4 class="date">2021-06-10</h4>
+            <h4 data-toc-skip class="date">2023-07-12</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bioimaginggroup/cmR/blob/master/vignettes/largevignette/cmr-usage.Rmd"><code>vignettes/largevignette/cmr-usage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bioimaginggroup/cmR/blob/HEAD/vignettes/largevignette/cmr-usage.Rmd" class="external-link"><code>vignettes/largevignette/cmr-usage.Rmd</code></a></small>
       <div class="hidden name"><code>cmr-usage.Rmd</code></div>
 
     </div>
 
     
     
-<div id="simulate-cmr-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#simulate-cmr-data" class="anchor"></a>Simulate cmr data</h2>
-<p>We use a simulated data set provided by the cmR package and add random white noise.</p>
+<div class="section level2">
+<h2 id="simulate-cmr-data">Simulate cmr data<a class="anchor" aria-label="anchor" href="#simulate-cmr-data"></a>
+</h2>
+<p>We use a simulated data set provided by the cmR package and add
+random white noise.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">cmrsim</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">k</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span>,<span class="va">k</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="va">cmrdata_sim</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span>,<span class="va">k</span>,<span class="op">]</span><span class="op">=</span><span class="va">cmrdata_sim</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span>,<span class="va">k</span>,<span class="op">]</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cmrsim</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">k</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span>,<span class="va">k</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cmrdata_sim</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span>,<span class="va">k</span>,<span class="op">]</span><span class="op">=</span><span class="va">cmrdata_sim</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span>,<span class="va">k</span>,<span class="op">]</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s have a look on the data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=1"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=1"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/showdata-1.png" width="700"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">10</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=10"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">10</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=10"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/showdata-2.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">20</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=20"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">20</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=20"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/showdata-3.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">30</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=30"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">cmrdata_sim</span><span class="op">[</span>,,,<span class="fl">30</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Time t=30"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/showdata-4.png" width="700"></p>
 </div>
-<div id="analysis" class="section level2">
-<h2 class="hasAnchor">
-<a href="#analysis" class="anchor"></a>Analysis</h2>
-<p>The function cmr() does the analysis and provides two methods: “local”, which is a voxel wise fitting of the time series and “spatial”, which uses the spatial prior used in Schmid (2011): Voxel-Based Adaptive Spatio-Temporal Modelling of Perfusion Cardiovascular MRI. IEEE TMI 30(7) p. 1305 - 1313.</p>
-<p>Here we start with the local analysis. The local analysis can be easily parallelised, each computer core can compute one voxel. Note: parallel computing cannot be used on Windows due to restrictions in the parallel package.</p>
+<div class="section level2">
+<h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
+</h2>
+<p>The function cmr() does the analysis and provides two methods:
+“local”, which is a voxel wise fitting of the time series and “spatial”,
+which uses the spatial prior used in Schmid (2011): Voxel-Based Adaptive
+Spatio-Temporal Modelling of Perfusion Cardiovascular MRI. IEEE TMI
+30(7) p. 1305 - 1313.</p>
+<p>Here we start with the local analysis. The local analysis can be
+easily parallelised, each computer core can compute one voxel. Note:
+parallel computing cannot be used on Windows due to restrictions in the
+parallel package.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">local</span><span class="op">=</span><span class="fu"><a href="../../reference/cmr.html">cmr</a></span><span class="op">(</span><span class="va">cmrdata_sim</span>,<span class="va">input_sim</span>,method<span class="op">=</span><span class="st">"local"</span>,cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">local</span><span class="op">=</span><span class="fu"><a href="../../reference/cmr.html">cmr</a></span><span class="op">(</span><span class="va">cmrdata_sim</span>,<span class="va">input_sim</span>,method<span class="op">=</span><span class="st">"local"</span>,cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">local</span><span class="op">$</span><span class="va">mbf</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">local</span><span class="op">$</span><span class="va">mbf</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/localanalysis-plot-1.png" width="700"></p>
-<p>The model uses a Bayesian framework and credible intervals are also produced. We can have a look at the length of the credible intervals voxelwise:</p>
+<p>The model uses a Bayesian framework and credible intervals are also
+produced. We can have a look at the length of the credible intervals
+voxelwise:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">local</span><span class="op">$</span><span class="va">ci</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">local</span><span class="op">$</span><span class="va">ci</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/localanalysis-ci-1.png" width="700"></p>
-<p>Now let’s have a look at the spatial analysis. Here, parallelisation is not as easy as above, but is also possible to some extent.</p>
+<p>Now let’s have a look at the spatial analysis. Here, parallelisation
+is not as easy as above, but is also possible to some extent.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spatial</span><span class="op">=</span><span class="fu"><a href="../../reference/cmr.html">cmr</a></span><span class="op">(</span><span class="va">cmrdata_sim</span>,<span class="va">input_sim</span>,method<span class="op">=</span><span class="st">"spatial"</span>,cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spatial</span><span class="op">=</span><span class="fu"><a href="../../reference/cmr.html">cmr</a></span><span class="op">(</span><span class="va">cmrdata_sim</span>,<span class="va">input_sim</span>,method<span class="op">=</span><span class="st">"spatial"</span>,cores<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">spatial</span><span class="op">$</span><span class="va">mbf</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">spatial</span><span class="op">$</span><span class="va">mbf</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/spatialanalysis-plot-1.png" width="700"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">spatial</span><span class="op">$</span><span class="va">ci</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../../reference/imageMBF.html">imageMBF</a></span><span class="op">(</span><span class="va">spatial</span><span class="op">$</span><span class="va">ci</span>,zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/spatialanalysis-plot-2.png" width="700"></p>
-<p>Finally, we compare the true maximum response used for the simulation and the results from the local analysis and the spatial analysis. Here, we use the “pseudo bullseye” representation.</p>
+<p>Finally, we compare the true maximum response used for the simulation
+and the results from the local analysis and the spatial analysis. Here,
+we use the “pseudo bullseye” representation.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../../reference/pseudobullseye.html">pseudobullseye</a></span><span class="op">(</span><span class="va">maxresp_sim</span><span class="op">)</span><span class="co">#; title(main="true")</span>
-<span class="fu"><a href="../../reference/pseudobullseye.html">pseudobullseye</a></span><span class="op">(</span><span class="va">local</span><span class="op">$</span><span class="va">mbf</span><span class="op">)</span><span class="co">#; title(main="local")</span>
-<span class="fu"><a href="../../reference/pseudobullseye.html">pseudobullseye</a></span><span class="op">(</span><span class="va">spatial</span><span class="op">$</span><span class="va">mbf</span><span class="op">)</span><span class="co">#; title(main="spatial")</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../../reference/pseudobullseye.html">pseudobullseye</a></span><span class="op">(</span><span class="va">maxresp_sim</span><span class="op">)</span><span class="co">#; title(main="true")</span></span>
+<span><span class="fu"><a href="../../reference/pseudobullseye.html">pseudobullseye</a></span><span class="op">(</span><span class="va">local</span><span class="op">$</span><span class="va">mbf</span><span class="op">)</span><span class="co">#; title(main="local")</span></span>
+<span><span class="fu"><a href="../../reference/pseudobullseye.html">pseudobullseye</a></span><span class="op">(</span><span class="va">spatial</span><span class="op">$</span><span class="va">mbf</span><span class="op">)</span><span class="co">#; title(main="spatial")</span></span></code></pre></div>
 <p><img src="cmr-usage_files/figure-html/pseudobullseye-1.png" width="700"></p>
 </div>
   </div>
@@ -152,11 +168,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Volker Schmid.</p>
+  <p></p>
+<p>Developed by Volker Schmid.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -164,6 +182,8 @@
 
   
 
+
+  
 
   </body>
 </html>
