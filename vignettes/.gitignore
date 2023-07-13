@@ -1,3 +1,4 @@
 *.R
 *_cache/
 *_files/
+largevignette/*/figure-html/

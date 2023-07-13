@@ -1,4 +1,4 @@
-NEWS
+# NEWS
 
 Version 1.0: Working package.
 Version 1.0.1: Small changes for CRAN.
